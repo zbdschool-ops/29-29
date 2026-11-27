@@ -1,0 +1,2075 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§ 29. Моральні та етичні цінності | Тренажер «Навігатор ризиків»</title>
+<style>
+:root{
+--primary:#1e3a8a;--primary-dark:#1e2a5e;--primary-light:#3b5ccc;--accent:#2563eb;
+--success:#16a34a;--danger:#dc2626;--warning:#f59e0b;--bg:#f1f5f9;--card:#fff;
+--text:#1e293b;--text-muted:#64748b;--border:#e2e8f0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:linear-gradient(135deg,#f3f4f6,#e5e7eb);color:var(--text);line-height:1.6;min-height:100vh;overflow-x:hidden;font-size:16px}
+button{font-family:inherit}
+/* ===== ПРОГРЕС ===== */
+.top-progress-bar{position:fixed;top:0;left:0;right:0;height:4px;background:var(--border);z-index:1001}
+.top-progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--success));width:0%;transition:width .5s}
+.progress-widget{position:fixed;top:80px;right:20px;background:#fff;padding:10px 12px;border-radius:10px;box-shadow:0 2px 10px rgba(30,58,138,.12);z-index:1000;min-width:150px;cursor:pointer;transition:all .3s}
+.progress-widget:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(30,58,138,.18)}
+.progress-widget-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;padding-bottom:8px;border-bottom:2px solid var(--border)}
+.progress-widget-title{font-weight:700;color:var(--primary);font-size:12px}
+.progress-widget-percentage{font-size:18px;font-weight:700;color:var(--accent)}
+.progress-widget-mini-map{display:flex;gap:4px;margin-top:8px}
+.mini-step{width:18px;height:18px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:600;color:var(--text-muted);transition:all .3s}
+.mini-step.current{background:var(--warning);color:#fff;animation:pulse 1.5s infinite}
+.mini-step.completed{background:var(--success);color:#fff}
+.toast-container{position:fixed;top:100px;right:20px;z-index:1002;display:flex;flex-direction:column;gap:8px;max-width:calc(100vw - 40px)}
+.toast{background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 8px 24px rgba(30,58,138,.2);display:flex;align-items:center;gap:12px;animation:toastIn .4s;border-left:4px solid var(--success);min-width:260px;max-width:360px}
+.toast.hiding{animation:toastOut .4s forwards}
+.toast-icon{font-size:24px;flex-shrink:0}
+.toast-message{font-weight:600;font-size:14px}
+@keyframes toastIn{from{opacity:0;transform:translateX(100px)}to{opacity:1;transform:translateX(0)}}
+@keyframes toastOut{to{opacity:0;transform:translateX(100px)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+/* ===== ХЕДЕР ===== */
+.header{background:linear-gradient(135deg,#1e2a5e 0%,#1e3a8a 50%,#2563eb 100%);color:#fff;padding:24px 32px;border-radius:0 0 16px 16px;box-shadow:0 4px 16px rgba(30,58,138,.15);margin-top:4px}
+.header-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.header h1{font-size:22px;font-weight:700;flex:1;min-width:200px}
+.header-buttons{display:flex;gap:12px;flex-wrap:wrap}
+/* ===== КНОПКИ ===== */
+.btn{padding:12px 24px;border-radius:10px;font-weight:600;cursor:pointer;transition:all .2s;border:none;font-size:16px;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#1d4ed8;box-shadow:0 4px 12px rgba(37,99,235,.3);transform:translateY(-2px)}
+.btn-secondary{background:#fff;color:var(--accent);border:2px solid var(--accent)}
+.btn-secondary:hover{background:#eff6ff}
+.btn-warning{background:var(--warning);color:#fff}
+.btn-warning:hover{background:#d97706}
+.btn-success{background:var(--success);color:#fff}
+.btn-success:hover{background:#15803d}
+.btn:focus-visible,[tabindex="0"]:focus-visible,select:focus-visible{outline:3px solid #93c5fd;outline-offset:2px}
+/* ===== КОНТЕЙНЕР / КАРТКИ ===== */
+.container{max-width:1200px;margin:0 auto;padding:40px 24px}
+.card{background:var(--card);border-radius:16px;padding:28px;box-shadow:0 4px 16px rgba(30,58,138,.08);margin-bottom:24px;transition:box-shadow .2s}
+.card:hover{box-shadow:0 8px 24px rgba(30,58,138,.14)}
+.card h2{font-size:22px;margin-bottom:16px;color:var(--primary)}
+.card h3{font-size:18px;margin-bottom:12px;color:var(--primary-dark)}
+.hero-unified{background:#fff;border-radius:16px;box-shadow:0 4px 16px rgba(30,58,138,.08);overflow:hidden;display:grid;grid-template-columns:1.3fr .7fr;align-items:stretch}
+.hero-illustration{background:#fff;padding:20px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.hero-illustration img{max-width:100%;height:auto;max-height:500px;object-fit:contain;border-radius:16px;display:block;margin:0 auto;box-shadow:0 4px 16px rgba(30,58,138,.1)}
+.hero-illustration-title{color:var(--primary);font-size:20px;font-weight:700;margin-bottom:16px;padding-bottom:5px;border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:center;gap:8px}
+.hero-navigation{padding:20px 24px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border)}
+.hero-navigation h2{color:var(--primary);font-size:16px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:8px}
+.step-navigation{display:flex;flex-direction:column;gap:8px;flex:1}
+.step-nav-item{padding:8px 10px;border-radius:6px;cursor:pointer;transition:all .3s;border:2px solid var(--border);display:flex;align-items:center;gap:10px}
+.step-nav-item:hover{border-color:var(--accent);background:#eff6ff;transform:translateX(4px)}
+.step-nav-item.active{border-color:var(--warning);background:#fef3c7}
+.step-nav-item.completed{border-color:var(--success);background:#dcfce7}
+.step-nav-number{width:26px;height:26px;border-radius:50%;background:var(--border);color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;font-size:11px}
+.step-nav-item.active .step-nav-number{background:var(--warning);color:#fff}
+.step-nav-item.completed .step-nav-number{background:var(--success);color:#fff}
+.step-nav-content{flex:1;min-width:0}
+.step-nav-title{font-weight:600;font-size:12px;line-height:1.3}
+.step-nav-status{font-size:10px;color:var(--text-muted)}
+.info-blocks{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+.feature-list{list-style:none;padding:0}
+.feature-list li{padding:10px 0 10px 32px;position:relative;border-bottom:1px solid var(--border);font-size:15px}
+.feature-list li:last-child{border-bottom:none}
+.feature-list li::before{content:attr(data-icon);position:absolute;left:0;font-size:18px;top:10px}
+.tip-card{background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:12px;padding:16px;text-align:center;margin-top:24px;font-size:15px}
+.step-header{background:#fff;border-radius:16px;padding:24px;margin-bottom:24px;box-shadow:0 4px 16px rgba(30,58,138,.08)}
+.step-header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px}
+.step-title{font-size:24px;color:var(--primary);font-weight:700}
+.step-badge{background:var(--warning);color:#fff;padding:6px 16px;border-radius:20px;font-weight:600;font-size:14px}
+/* ===== ТЕОРІЯ ===== */
+.theory-compact{background:linear-gradient(135deg,#dbeafe,#bfdbfe);border:2px solid #93c5fd;border-radius:14px;padding:20px;margin:16px 0}
+.theory-compact h4{color:var(--primary);font-size:16px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.theory-compact p{font-size:14px;line-height:1.6;margin-bottom:8px}
+.key-point{background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid #fbbf24;border-radius:12px;padding:16px;margin:16px 0;text-align:center;font-weight:600;color:#78350f}
+.quote-block{background:linear-gradient(135deg,#fef3c7,#fde68a);border-left:5px solid var(--warning);border-radius:8px;padding:16px 20px;margin:16px 0;font-style:italic;color:#78350f;font-size:15px}
+.theory-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:20px 0}
+.theory-block{background:#fff;border-radius:14px;padding:20px;border:2px solid var(--border);transition:all .3s;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.theory-block:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.1)}
+.theory-block h4{color:var(--primary);margin-bottom:12px;font-size:16px;display:flex;align-items:center;gap:8px}
+.theory-block p{font-size:14px;line-height:1.6}
+.theory-block ul{list-style:none;padding:0;margin-top:8px}
+.theory-block ul li{padding:6px 0 6px 24px;position:relative;font-size:14px;border-bottom:1px solid var(--border)}
+.theory-block ul li:last-child{border-bottom:none}
+.theory-block ul li::before{content:attr(data-icon);position:absolute;left:0;font-size:16px;top:6px}
+.block-blue{background:linear-gradient(135deg,#eff6ff,#dbeafe);border-color:#93c5fd}
+.block-blue h4{color:#1e40af}
+.block-green{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:#86efac}
+.block-green h4{color:#166534}
+.block-purple{background:linear-gradient(135deg,#f5f3ff,#ede9fe);border-color:#c4b5fd}
+.block-purple h4{color:#6d28d9}
+.block-orange{background:linear-gradient(135deg,#fffbeb,#fef3c7);border-color:#fcd34d}
+.block-orange h4{color:#92400e}
+.block-pink{background:linear-gradient(135deg,#fce7f3,#fbcfe8);border-color:#f9a8d4}
+.block-pink h4{color:#be185d}
+.block-red{background:linear-gradient(135deg,#fee2e2,#fecaca);border-color:#fca5a5}
+.block-red h4{color:#991b1b}
+.theory-img-block{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:2px solid var(--border);border-radius:14px;padding:20px;margin:20px 0;text-align:center}
+.theory-img-block img{max-width:100%;height:auto;max-height:360px;object-fit:contain;border-radius:12px;margin:0 auto;display:block;box-shadow:0 4px 12px rgba(30,58,138,.1)}
+.theory-img-caption{font-size:13px;color:var(--text-muted);font-style:italic;margin-top:12px}
+/* ===== ІЛЮСТРАЦІЇ / FALLBACK ===== */
+.img-wrapper{position:relative;width:100%;display:flex;justify-content:center;align-items:center}
+.img-fallback{display:none;width:100%;min-height:200px;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:linear-gradient(135deg,#f1f5f9,#e2e8f0);border:2px dashed #cbd5e1;border-radius:16px;font-size:56px;color:var(--text-muted);padding:20px}
+.img-fallback-text{font-size:13px;font-weight:600;color:var(--text-muted);text-align:center;padding:0 12px;line-height:1.5}
+.img-wrapper.img-failed img{display:none}
+.img-wrapper.img-failed .img-fallback{display:flex}
+.situation-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:24px;margin:24px 0;align-items:start}
+.situation-illustration-left{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid #93c5fd;border-radius:12px;padding:20px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:240px;overflow:hidden}
+.situation-img{max-width:100%;height:auto;max-height:300px;object-fit:contain;border-radius:12px;margin-bottom:12px;display:block;margin-left:auto;margin-right:auto;box-shadow:0 4px 12px rgba(30,58,138,.1)}
+.situation-caption{font-size:13px;color:var(--text-muted);font-style:italic;margin-top:8px}
+/* ===== СИМУЛЯЦІЯ: ІЛЮСТРАЦІЯ + ПРОГРЕС ПРАВОРУЧ ===== */
+.sim-top-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:24px;margin:24px 0;align-items:stretch}
+.sim-visual{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid #93c5fd;border-radius:14px;padding:20px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:hidden}
+.sim-visual img{max-width:100%;height:auto;max-height:320px;object-fit:contain;border-radius:12px;box-shadow:0 4px 12px rgba(30,58,138,.12)}
+.sim-progress-side{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid #93c5fd;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.sim-progress-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding-bottom:12px;border-bottom:2px solid #bfdbfe}
+.sim-progress-title{font-weight:700;color:var(--primary);font-size:15px}
+.sim-progress-value{font-weight:700;color:var(--accent);font-size:14px}
+.sim-dots{display:flex;gap:8px;justify-content:center}
+.sim-current-q{font-weight:600;color:var(--primary-dark);font-size:14px;text-align:center;background:rgba(255,255,255,.75);padding:10px;border-radius:10px}
+.sim-stages{display:flex;flex-direction:column;gap:8px}
+.sim-stage{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.55);border:2px solid transparent;font-size:13px;color:var(--text-muted);transition:all .3s}
+.sim-stage small{display:block;font-weight:400;font-size:11px;opacity:.9;margin-top:2px}
+.sim-stage-num{width:26px;height:26px;border-radius:50%;background:#cbd5e1;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0}
+.sim-stage.active{background:#fff;border-color:var(--accent);color:var(--text);font-weight:600;box-shadow:0 3px 10px rgba(37,99,235,.12)}
+.sim-stage.active .sim-stage-num{background:var(--accent)}
+.sim-stage.done{background:#dcfce7;border-color:#86efac;color:#166534}
+.sim-stage.done .sim-stage-num{background:var(--success)}
+.sim-tip{font-size:12px;color:#1e40af;background:rgba(255,255,255,.75);padding:10px 12px;border-radius:8px;margin-top:auto}
+/* ===== ПИТАННЯ / ВІДПОВІДІ ===== */
+.question-highlight{background:linear-gradient(135deg,#fef3c7,#fde68a);border:3px solid #f59e0b;border-radius:16px;padding:20px 24px;margin-bottom:20px;text-align:center;box-shadow:0 4px 16px rgba(245,158,11,.15)}
+.question-highlight-icon{font-size:44px;margin-bottom:8px;display:block}
+.question-highlight-text{font-size:20px;font-weight:700;color:#78350f;line-height:1.4}
+.question-highlight-sub{font-size:14px;color:#92400e;margin-top:8px;font-style:italic}
+.task-options{display:grid;gap:12px;margin:20px 0}
+.option{padding:16px;border:2px solid var(--border);border-radius:12px;cursor:pointer;transition:all .2s;display:flex;align-items:flex-start;gap:12px}
+.option:hover:not(.disabled){border-color:var(--accent);background:#eff6ff}
+.option.selected{border-color:var(--accent);background:#eff6ff}
+.option.correct{border-color:var(--success);background:#dcfce7}
+.option.incorrect{border-color:var(--danger);background:#fee2e2}
+.option.disabled{cursor:default;opacity:.85}
+.option-radio,.option-checkbox{width:24px;height:24px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.option-radio{border-radius:50%}
+.option-checkbox{border-radius:6px}
+.option.selected .option-radio,.option.selected .option-checkbox{border-color:var(--accent);background:var(--accent)}
+.option.selected .option-radio::after,.option.selected .option-checkbox::after{content:'✓';color:#fff;font-size:14px}
+.option.correct .option-radio,.option.correct .option-checkbox{border-color:var(--success);background:var(--success)}
+.option.correct .option-radio::after,.option.correct .option-checkbox::after{content:'✓';color:#fff;font-size:14px}
+.option.incorrect .option-radio,.option.incorrect .option-checkbox{border-color:var(--danger);background:var(--danger)}
+.option.incorrect .option-radio::after,.option.incorrect .option-checkbox::after{content:'✕';color:#fff;font-size:14px}
+.option-text{flex:1}
+.option-label{font-weight:600;margin-bottom:4px}
+.option-explanation{font-size:13px;color:var(--text-muted);margin-top:6px;font-style:italic;display:none}
+.option.correct .option-explanation,.option.incorrect .option-explanation{display:block}
+.feedback{padding:16px;border-radius:12px;margin:16px 0;animation:fadeIn .3s}
+.feedback-success{background:#dcfce7;border:2px solid var(--success);color:#166534}
+.feedback-error{background:#fee2e2;border:2px solid var(--danger);color:#991b1b}
+.feedback-warning{background:#fef3c7;border:2px solid var(--warning);color:#92400e}
+.navigation{display:flex;justify-content:space-between;gap:12px;margin-top:32px;flex-wrap:wrap}
+.navigation .btn{flex:1;min-width:140px}
+.hidden{display:none!important}
+.mb-24{margin-bottom:24px}
+.mt-24{margin-top:24px}
+/* ===== ІНТЕРАКТИВНІ КАРТКИ ЦІННОСТЕЙ / РОЛЕЙ ===== */
+.ei-card{cursor:pointer;transition:all .3s;overflow:hidden;padding:0!important;margin-bottom:0}
+.ei-card:hover{transform:translateY(-6px);box-shadow:0 12px 28px rgba(30,58,138,.18)}
+.ei-card-header{padding:20px;text-align:center;border-radius:14px 14px 0 0}
+.ei-card-icon{font-size:48px;margin-bottom:8px}
+.ei-card-title{font-size:18px;font-weight:700;color:var(--primary);margin-bottom:4px}
+.ei-card-subtitle{font-size:13px;color:var(--text-muted)}
+.ei-card-content{max-height:0;overflow:hidden;transition:max-height .4s ease-out;padding:0 20px}
+.ei-card.expanded .ei-card-content{max-height:1200px;padding:20px}
+.ei-card-section{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.ei-card-section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.ei-card-section h5{color:var(--primary);font-size:14px;margin-bottom:8px;font-weight:700}
+.ei-card-section p{font-size:14px;line-height:1.6}
+.ei-card-section ul{list-style:none;padding:0;margin-top:8px}
+.ei-card-section ul li{padding:6px 0 6px 24px;position:relative;font-size:13px}
+.ei-card-section ul li::before{content:attr(data-icon);position:absolute;left:0;font-size:14px;top:6px}
+.ei-card-hint{display:block;text-align:center;padding:12px;font-size:12px;color:var(--text-muted);font-weight:600}
+.ei-card.expanded .ei-card-hint{display:none}
+/* ===== ЗІСТАВЛЕННЯ / АКОРДЕОН / TF / YN ===== */
+.matching-container{display:flex;flex-direction:column;gap:12px;margin:16px 0}
+.matching-row{display:grid;grid-template-columns:1fr 40px 1.5fr;gap:12px;align-items:center}
+.matching-left{background:var(--bg);padding:12px;border-radius:8px;font-weight:600;font-size:15px;border:2px solid var(--border)}
+.matching-arrow{text-align:center;font-size:20px;color:var(--text-muted)}
+.matching-select{width:100%;padding:12px;border:2px solid var(--border);border-radius:8px;font-size:15px;background:#fff;cursor:pointer;transition:all .2s}
+.matching-select.correct{border-color:var(--success);background:#dcfce7;color:#166534}
+.matching-select.incorrect{border-color:var(--danger);background:#fee2e2;color:#991b1b}
+.accordion-item{background:#fff;border:2px solid var(--border);border-radius:12px;margin:12px 0;overflow:hidden}
+.accordion-header{padding:16px 20px;background:linear-gradient(135deg,#eff6ff,#dbeafe);cursor:pointer;font-weight:600;color:var(--primary);display:flex;justify-content:space-between;align-items:center;gap:12px;transition:all .2s}
+.accordion-header:hover{background:linear-gradient(135deg,#dbeafe,#bfdbfe)}
+.accordion-icon{font-size:20px;transition:transform .3s;flex-shrink:0}
+.accordion-item.active .accordion-icon{transform:rotate(180deg)}
+.accordion-content{max-height:0;overflow:hidden;transition:max-height .35s ease-out}
+.accordion-item.active .accordion-content{max-height:1000px}
+.accordion-body{padding:16px 20px;border-top:2px solid var(--border)}
+.tf-container{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+.tf-card{background:#fff;border-radius:12px;padding:20px;border:2px solid var(--border);text-align:center;transition:all .3s;cursor:pointer}
+.tf-card:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(0,0,0,.08)}
+.tf-card.true-card{border-color:#86efac;background:linear-gradient(135deg,#f0fdf4,#dcfce7)}
+.tf-card.false-card{border-color:#ef4444;background:linear-gradient(135deg,#fee2e2,#fecaca)}
+.tf-card-icon{font-size:44px;margin-bottom:12px}
+.tf-card-title{font-weight:700;font-size:18px;margin-bottom:8px}
+.tf-card.true-card .tf-card-title{color:#166534}
+.tf-card.false-card .tf-card-title{color:#991b1b}
+.yn-grid{display:grid;gap:12px;margin:16px 0}
+.yn-row{background:var(--bg);padding:16px;border-radius:12px;border:2px solid var(--border)}
+.yn-question{font-weight:600;margin-bottom:12px;font-size:14px}
+.yn-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.yn-btn{padding:12px;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-weight:600;text-align:center;transition:all .2s;background:#fff;font-size:14px;min-height:48px}
+.yn-btn:hover{border-color:var(--accent);background:#eff6ff}
+.yn-btn.selected-yes{background:#dcfce7;border-color:var(--success);color:#166534}
+.yn-btn.selected-no{background:#fee2e2;border-color:var(--danger);color:#991b1b}
+.yn-btn.correct{background:#dcfce7!important;border-color:var(--success)!important;color:#166534!important}
+.yn-btn.incorrect{background:#fee2e2!important;border-color:var(--danger)!important;color:#991b1b!important}
+/* ===== ДВІ КОЛОНКИ ===== */
+.two-col-matching{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:20px 0}
+.col-left,.col-right{display:flex;flex-direction:column;gap:12px}
+.col-header{background:var(--primary);color:#fff;padding:12px 16px;border-radius:10px 10px 0 0;font-weight:700;text-align:center}
+.match-item{background:#fff;border:2px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;transition:all .2s;user-select:none}
+.match-item:hover{border-color:var(--accent);background:#eff6ff}
+.match-item.selected{border-color:var(--warning);background:#fef3c7;transform:scale(1.02)}
+.match-item.matched{border-color:var(--success);background:#dcfce7;cursor:default}
+.match-item.wrong{border-color:var(--danger);background:#fee2e2;animation:shake .4s}
+.match-item-number{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:13px;margin-right:8px}
+/* ===== СИМУЛЯЦІЯ КРОКІВ ===== */
+.alg-step{animation:fadeIn .4s}
+.alg-dot{width:32px;height:32px;border-radius:50%;background:var(--border);color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;transition:all .3s}
+.alg-dot.active{background:var(--accent);color:#fff;transform:scale(1.1)}
+.alg-dot.completed{background:var(--success);color:#fff}
+/* ===== САМООЦІНЮВАННЯ ===== */
+.step6-header{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;padding:32px;border-radius:16px;margin-bottom:24px;text-align:center;box-shadow:0 4px 16px rgba(245,158,11,.3)}
+.step6-header h2{font-size:28px;font-weight:800;margin-bottom:8px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:24px}
+.stat-card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 12px rgba(30,58,138,.08);text-align:center}
+.stat-value{font-size:32px;font-weight:800;color:var(--primary)}
+.stat-label{font-size:14px;color:var(--text-muted);margin-top:4px}
+.progress-circle-container{display:flex;justify-content:center;align-items:center;margin:24px 0}
+.progress-circle{width:180px;height:180px;border-radius:50%;background:conic-gradient(var(--success) 0%,var(--bg) 0%);display:flex;justify-content:center;align-items:center;transition:background 1s;box-shadow:0 4px 16px rgba(30,58,138,.1)}
+.progress-circle-inner{width:140px;height:140px;background:#fff;border-radius:50%;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.circle-percentage{font-size:40px;font-weight:800;color:var(--primary)}
+.circle-label{font-size:14px;color:var(--text-muted)}
+.level-badge{display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid #bfdbfe;padding:16px 24px;border-radius:12px;margin:16px 0}
+.level-badge-icon{font-size:40px}
+.level-badge-title{font-size:18px;font-weight:700;color:var(--primary)}
+.level-badge-desc{font-size:14px;color:var(--text-muted)}
+.skill-eval{margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.skill-eval:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.skill-title{font-weight:600;font-size:16px}
+.star-rating{display:flex;gap:8px;margin-top:8px}
+.star{font-size:28px;cursor:pointer;color:var(--border);transition:color .2s;line-height:1}
+.star:hover,.star.active{color:var(--warning)}
+/* ===== МОДАЛКИ ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.6);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:2000;opacity:0;visibility:hidden;transition:all .3s;padding:20px}
+.modal-overlay.active{opacity:1;visibility:visible}
+.modal{background:#fff;border-radius:16px;padding:32px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 12px 40px rgba(30,58,138,.22);transform:scale(.9);transition:transform .3s}
+.modal-overlay.active .modal{transform:scale(1)}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;gap:12px}
+.modal-header h2{color:var(--primary);font-size:22px}
+.modal-close{background:none;border:none;font-size:28px;cursor:pointer;color:var(--text-muted);width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:8px;flex-shrink:0}
+.modal-close:hover{background:var(--bg);color:var(--text)}
+.text-center{text-align:center}
+/* ===== АДАПТИВНІСТЬ ===== */
+@media(max-width:968px){
+.hero-unified{grid-template-columns:1fr}
+.hero-illustration{border-bottom:2px dashed var(--accent);min-height:280px}
+.info-blocks{grid-template-columns:1fr}
+.progress-widget{display:none!important}
+.situation-layout{grid-template-columns:1fr}
+.theory-grid{grid-template-columns:1fr}
+.matching-row{grid-template-columns:1fr;gap:8px}
+.matching-arrow{transform:rotate(90deg)}
+.tf-container{grid-template-columns:1fr}
+.two-col-matching{grid-template-columns:1fr}
+.col-header{border-radius:10px}
+.sim-top-grid{grid-template-columns:1fr}
+.sim-visual img{max-height:280px}
+.question-highlight-text{font-size:17px}
+}
+@media(max-width:768px){
+.header{padding:16px;border-radius:0 0 12px 12px}
+.header h1{font-size:16px}
+.header-buttons .btn{padding:10px 12px;font-size:14px}
+.container{padding:20px 16px}
+.card{padding:20px}
+.navigation .btn{width:100%;min-width:100%}
+.task-options{grid-template-columns:1fr!important}
+.yn-buttons{grid-template-columns:1fr}
+.sim-stages{display:grid;grid-template-columns:1fr 1fr}
+.sim-stage{padding:8px}
+.sim-stage small{font-size:10px}
+.step-title{font-size:20px}
+.modal{padding:24px}
+}
+@media(max-width:480px){
+.card h2{font-size:18px}
+.option{padding:12px;font-size:14px}
+.question-highlight{padding:16px}
+.question-highlight-text{font-size:16px}
+.sim-stages{grid-template-columns:1fr}
+.step6-header h2{font-size:22px}
+}
+.mobile-hint{display:none}
+@media(max-width:968px){
+.mobile-hint{display:block}
+}
+</style>
+</head>
+<body>
+
+<div class="top-progress-bar"><div class="top-progress-fill" id="topProgressBar"></div></div>
+
+<div class="progress-widget" id="progressWidget" onclick="showProgressModal()" tabindex="0" role="button" aria-label="Мій прогрес">
+<div class="progress-widget-header"><span class="progress-widget-title"> Прогрес</span><span class="progress-widget-percentage" id="widgetPercentage">0%</span></div>
+<div style="font-size:10px;color:var(--text-muted);margin-bottom:6px">Виконано: <strong id="widgetTasks">0/14</strong></div>
+<div class="progress-widget-mini-map" id="widgetMiniMap"></div>
+</div>
+
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+<header class="header">
+<div class="header-content">
+<h1 id="headerTitle">⚖️ § 29. Моральні та етичні цінності</h1>
+<div class="header-buttons">
+<button class="btn btn-secondary" onclick="goToMainPage()">← До змісту</button>
+<button class="btn btn-secondary" onclick="showProgressModal()">📊 Прогрес</button>
+<button class="btn btn-secondary" onclick="showHelpModal()">❓ Як працювати?</button>
+</div>
+</div>
+</header>
+
+<!-- ================= ГОЛОВНА СТОРІНКА ================= -->
+<main class="container" id="mainPage">
+<div class="hero-unified">
+<div class="hero-illustration">
+<div class="hero-illustration-title">⚖️ § 29. Моральні та етичні цінності</div>
+<div class="img-wrapper">
+<img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1792751499/27-1_pthvtv.png" alt="Моральні та етичні цінності: внутрішній компас людини" onerror="this.parentElement.classList.add('img-failed')">
+<div class="img-fallback"><div>⚖️</div><div class="img-fallback-text">Моральні та етичні цінності</div></div>
+</div>
+<p class="situation-caption">Цінності — це внутрішній компас, який допомагає обирати гідну поведінку.</p>
+</div>
+<div class="hero-navigation">
+<h2>🧭 Навігація по кроках</h2>
+<div class="step-navigation" id="stepNavigation"></div>
+<button class="btn btn-primary mt-24" onclick="goToStep(1)" style="width:100%;font-size:17px;padding:14px">🚀 Розпочати параграф →</button>
+</div>
+</div>
+
+<div class="info-blocks">
+<div class="card" style="margin:0"><h3>🎯 У цьому параграфі ти:</h3>
+<ul class="feature-list">
+<li data-icon="🧭">з'ясуєш, що таке моральні й етичні цінності та межі;</li>
+<li data-icon="🔍">навчишся розпізнавати дискримінацію, булінг і порушення етичних меж;</li>
+<li data-icon="💬">потренуєшся висловлювати власну позицію ненасильницько;</li>
+<li data-icon="🛡️">дізнаєшся, як відповідально реагувати на неетичну поведінку;</li>
+<li data-icon="⭐">оціниш власні ціннісні пріоритети.</li>
+</ul></div>
+<div class="card" style="margin:0"><h3>📋 Що ти робитимеш?</h3>
+<ul class="feature-list">
+<li data-icon="🎭">Аналізуватимеш ситуацію зі стартового завдання</li>
+<li data-icon="🧩">Досліджуватимеш 10 моральних цінностей через інтерактивні картки</li>
+<li data-icon="🎮">Пройдеш симуляцію «Алгоритм відповідальної позиції»</li>
+<li data-icon="🛡️">Пройдеш симуляцію «Як відстоювати свої межі»</li>
+<li data-icon="‍🧑">Розпізнаватимеш ролі в булінгу та аналізуватимеш випадок Олесі</li>
+<li data-icon="⭐">Оціниш свої вміння</li>
+</ul></div>
+</div>
+<div class="tip-card">💡 <strong>Пам'ятай:</strong> «Поважати людину — означає визнавати її гідність, навіть коли ви не поділяєте її поглядів».</div>
+</main>
+
+<!-- ================= КРОК 1 ================= -->
+<main class="container hidden" id="step1Page">
+<div class="step-header"><h2 class="step-title">🎯 Крок 1. Стартове завдання</h2></div>
+<section class="card">
+<div class="question-highlight">
+<span class="question-highlight-icon"></span>
+<div class="question-highlight-text">Під час підготовки спільного проєкту учні обговорювали розподіл завдань.</div>
+<div class="question-highlight-sub">Коли Зоя запропонувала власну ідею, Марк перебив її і сказав: «Серйозно? Ти сама чуєш, що пропонуєш? Це ж якась дурня. Не витрачаймо на це час». Частина учнів засміялася, а решта промовчала. Зоя більше не брала участі в обговоренні.</div>
+</div>
+
+<div class="situation-layout">
+<div class="situation-illustration-left">
+<div class="img-wrapper">
+<img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1792751502/27-2_siue0n.png" alt="Зоя засмучена після зневажливого коментаря Марка, однокласники сміються або мовчать" class="situation-img" loading="lazy" onerror="this.parentElement.classList.add('img-failed')">
+<div class="img-fallback"><div></div><div class="img-fallback-text">Ситуація в класі: знецінення ідеї та реакція свідків</div></div>
+</div>
+</div>
+<div>
+<p style="margin:12px 0;color:var(--text-muted);font-style:italic"> <strong>Які дії учасників можна вважати неетичними?</strong></p>
+<div class="task-options" id="s1t1">
+<div class="option" data-correct="false" onclick="sel(this,'s1t1')"><div class="option-radio"></div><div class="option-text"><div class="option-label"> Тільки Марк, бо він перебив Зою</div></div></div>
+<div class="option" data-correct="true" onclick="sel(this,'s1t1')"><div class="option-radio"></div><div class="option-text"><div class="option-label">Марк (принизив ідею), учні, які сміялися (підтримали агресора), і ті, хто промовчав (бездіяльністю дозволили порушенню меж)</div></div></div>
+<div class="option" data-correct="false" onclick="sel(this,'s1t1')"><div class="option-radio"></div><div class="option-text"><div class="option-label">Ніхто, бо це просто жарт і робочий процес</div></div></div>
+</div>
+<div id="s1t1f" class="feedback" style="display:none"></div>
+</div>
+</div>
+
+<div class="navigation">
+<button class="btn btn-secondary" onclick="goToMainPage()">← До змісту</button>
+<button class="btn btn-primary" onclick="chk('s1t1','step1_task1')">✓ Перевірити</button>
+<button class="btn btn-success" onclick="goToStep(2)">Далі: Крок 2 →</button>
+</div>
+</section>
+</main>
+
+<!-- ================= КРОК 2 ================= -->
+<main class="container hidden" id="step2Page">
+<div class="step-header"><div class="step-header-top"><h2 class="step-title">🧭 Крок 2. Моральні цінності як орієнтири</h2><span class="step-badge">3 завдання</span></div></div>
+
+<!-- ТЕОРІЯ -->
+<section class="card" id="s2Theory">
+<h2>📖 Теоретичний блок</h2>
+<div class="theory-compact" style="background:linear-gradient(135deg,#f3e8ff,#e9d5ff);border-color:#a855f7">
+<h4 style="color:#6d28d9"> Моральні та етичні цінності</h4>
+<p><strong>Моральні цінності</strong> — це внутрішні уявлення людини про добро, справедливість, чесність і відповідальність.</p>
+<p><strong>Етичні норми</strong> — правила поведінки, які допомагають виявляти ці цінності у взаємодії з іншими.</p>
+<p><strong>Власна позиція</strong> формується на основі цінностей, перевірених фактів та аргументів. Обирати відповідальну позицію — означає заздалегідь обмірковувати свої вчинки та розуміти їхні наслідки.</p>
+</div>
+<div class="quote-block">Поважати людину — означає визнавати її гідність, навіть коли ви не поділяєте її поглядів.</div>
+
+<h3 style="margin:24px 0 16px;color:var(--primary)"> 10 ключових моральних цінностей</h3>
+<p style="margin-bottom:16px;color:var(--text-muted)">💡 <strong>Натисни на картку</strong>, щоб дізнатися більше та побачити приклади з життя підлітків.</p>
+
+<div class="theory-grid">
+<div class="ei-card card" tabindex="0" role="button" aria-expanded="false" aria-label="Повага — розгорнути" onclick="toggleEICard(this)">
+<div class="ei-card-header" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)"><div class="ei-card-icon">🤝</div><div class="ei-card-title">Повага</div><div class="ei-card-subtitle">Визнання гідності іншого</div></div>
+<div class="ei-card-content"><div class="ei-card-section"><h5>📖 Що це означає?</h5><p>Визнавати гідність іншої людини, не принижувати й не знецінювати її, навіть коли ви не згодні.</p></div><div class="ei-card-section"><h5>🎯 Приклад з життя</h5><p>Ти не згоден з думкою однокласника, але кажеш: «Цікавий погляд, а чому саме так?» замість «Ти нічого не тямиш».</p></div></div>
+<span class="ei-card-hint">🔽 Натисни, щоб розгорнути</span></div>
+
+<div class="ei-card card" tabindex="0" role="button" aria-expanded="false" aria-label="Чесність — розгорнути" onclick="toggleEICard(this)">
+<div class="ei-card-header" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0)"><div class="ei-card-icon">💎</div><div class="ei-card-title">Чесність</div><div class="ei-card-subtitle">Правда у словах і вчинках</div></div>
+<div class="ei-card-content"><div class="ei-card-section"><h5>📖 Що це означає?</h5><p>Говорити правду, не приховувати важливої інформації, не обманювати себе й інших.</p></div><div class="ei-card-section"><h5>🎯 Приклад з життя</h5><p>Ти не виконав свою частину проєкту — чесно кажеш команді заздалегідь, а не ховаєшся до останнього моменту.</p></div></div>
+<span class="ei-card-hint"> Натисни, щоб розгорнути</span></div>
+
+<div class="ei-card card" tabindex="0" role="button" aria-expanded="false" aria-label="Справедливість — розгорнути" onclick="toggleEICard(this)">
+<div class="ei-card-header" style="background:linear-gradient(135deg,#f3e8ff,#e9d5ff)"><div class="ei-card-icon">⚖️</div><div class="ei-card-title">Справедливість</div><div class="ei-card-subtitle">Рівне ставлення до всіх</div></div>
+<div class="ei-card-content"><div class="ei-card-section"><h5>📖 Що це означає?</h5><p>Оцінювати вчинки, а не людей; розподіляти завдання й визнання за реальним внеском.</p></div><div class="ei-card-section"><h5>🎯 Приклад з життя</h5><p>Указувати серед авторів відеоролика лише тих, хто справді працював, а не «щоб не псувати стосунки».</p></div></div>
+<span class="ei-card-hint">🔽 Натисни, щоб розгорнути</span></div>
+
+<div class="ei-card card" tabindex="0" role="button" aria-expanded="false" aria-label="Відповідальність — розгорнути" onclick="toggleEICard(this)">
+<div class="ei-card-header" style="background:linear-gradient(135deg,#ffedd5,#fed7aa)"><div class="ei-card-icon">🎯</div><div class="ei-card-title">Відповідальність</div><div class="ei-card-subtitle">Відповідати за свої вчинки</div></div>
+<div class="ei-card-content"><div class="ei-card-section"><h5>📖 Що це означає?</h5><p>Заздалегідь обмірковувати вчинки, розуміти їхні наслідки й за потреби виправляти помилки.</p></div><div class="ei-card-section"><h5> Приклад з життя</h5><p>Ти випадково перебив когось — помітив це й сказав: «Вибач, закінчи свою думку».</p></div></div>
+<span class="ei-card-hint">🔽 Натисни, щоб розгорнути</span></div>
+
+<div class="ei-card card" tabindex="0" role="button" aria-expanded="false" aria-label="Гідність — розгорнути" onclick="toggleEICard(this)">
+<div class="ei-card-header" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8)"><div class="ei-card-icon">👑</div><div class="ei-card-title">Гідність</div><div class="ei-card-subtitle">Внутрішня цінність кожної людини</div></div>
+<div class="ei-card-content"><div class="ei-card-section"><h5>📖 Що це означає?</h5><p>Кожна людина має цінність просто тому, що вона — людина. Це не залежить від оцінок, статусу чи одягу.</p></div><div class="ei-card-section"><h5> Приклад з життя</h5><p>Ти не висміюєш однокласника через недорогий одяг, навіть якщо інші це роблять.</p></div></div>
+<span class="ei-card-hint">🔽 Натисни, щоб розгорнути</span></div>
+
+<div class="ei-card card" tabindex="0" role="button" aria-expanded="false" aria-label="Довіра — розгорнути" onclick="toggleEICard(this)">
+<div class="ei-card-header" style="background:linear-gradient(135deg,#ecfeff,#cffafe)"><div class="ei-card-icon">🔒</div><div class="ei-card-title">Довіра</div><div class="ei-card-subtitle">Основа стосунків</div></div>
+<div class="ei-card-content"><div class="ei-card-section"><h5>📖 Що це означає?</h5><p>Відповідальність за слова й дії, збереження конфіденційності, виконання обіцянок.</p></div><div class="ei-card-section"><h5> Приклад з життя</h5><p>Друг поділився з тобою особистим — ти не пересилаєш це повідомлення в класний чат.</p></div></div>
+<span class="ei-card-hint">🔽 Натисни, щоб розгорнути</span></div>
+
+<div class="ei-card card" tabindex="0" role="button" aria-expanded="false" aria-label="Взаємодопомога — розгорнути" onclick="toggleEICard(this)">
+<div class="ei-card-header" style="background:linear-gradient(135deg,#fef3c7,#fde68a)"><div class="ei-card-icon">🤲</div><div class="ei-card-title">Взаємодопомога</div><div class="ei-card-subtitle">Підтримка в складний момент</div></div>
+<div class="ei-card-content"><div class="ei-card-section"><h5>📖 Що це означає?</h5><p>Готовність підтримати іншого, поділитися часом чи знаннями без очікування винагороди.</p></div><div class="ei-card-section"><h5>🎯 Приклад з життя</h5><p>Однокласниця не розуміє тему — ти пропонуєш разом розібратися, а не ігноруєш.</p></div></div>
+<span class="ei-card-hint"> Натисни, щоб розгорнути</span></div>
+
+<div class="ei-card card" tabindex="0" role="button" aria-expanded="false" aria-label="Людяність — розгорнути" onclick="toggleEICard(this)">
+<div class="ei-card-header" style="background:linear-gradient(135deg,#fee2e2,#fecaca)"><div class="ei-card-icon">❤️</div><div class="ei-card-title">Людяність</div><div class="ei-card-subtitle">Теплота й співчуття</div></div>
+<div class="ei-card-content"><div class="ei-card-section"><h5>📖 Що це означає?</h5><p>Здатність бачити в іншій людині живі почуття, реагувати на її біль, радість, потреби.</p></div><div class="ei-card-section"><h5>🎯 Приклад з життя</h5><p>Ти помічаєш, що хтось у класі сумний — підходиш і питаєш: «У тебе все гаразд?»</p></div></div>
+<span class="ei-card-hint">🔽 Натисни, щоб розгорнути</span></div>
+
+<div class="ei-card card" tabindex="0" role="button" aria-expanded="false" aria-label="Рівність — розгорнути" onclick="toggleEICard(this)">
+<div class="ei-card-header" style="background:linear-gradient(135deg,#eef2ff,#e0e7ff)"><div class="ei-card-icon">⚖️</div><div class="ei-card-title">Рівність</div><div class="ei-card-subtitle">Однакові права для всіх</div></div>
+<div class="ei-card-content"><div class="ei-card-section"><h5> Що це означає?</h5><p>Визнавати рівні права й можливості кожної людини незалежно від її відмінностей.</p></div><div class="ei-card-section"><h5>🎯 Приклад з життя</h5><p>Ти не ділиш клас на «популярних» і «нецікавих» — спілкуєшся з усіма однаково поважливо.</p></div></div>
+<span class="ei-card-hint">🔽 Натисни, щоб розгорнути</span></div>
+
+<div class="ei-card card" tabindex="0" role="button" aria-expanded="false" aria-label="Принциповість — розгорнути" onclick="toggleEICard(this)">
+<div class="ei-card-header" style="background:linear-gradient(135deg,#f5f3ff,#ede9fe)"><div class="ei-card-icon">🛡️</div><div class="ei-card-title">Принциповість</div><div class="ei-card-subtitle">Вірність своїм цінностям</div></div>
+<div class="ei-card-content"><div class="ei-card-section"><h5> Що це означає?</h5><p>Не зраджувати своїм переконанням навіть під тиском більшості.</p></div><div class="ei-card-section"><h5>🎯 Приклад з життя</h5><p>Усі сміються з чиєїсь помилки — ти не приєднуєшся, навіть якщо це «модно».</p></div></div>
+<span class="ei-card-hint">🔽 Натисни, щоб розгорнути</span></div>
+</div>
+
+<div class="key-point">💡 <strong>Важливо!</strong> Цінності допомагають обирати поведінку, яка не порушує прав, гідності та особистих меж інших людей.</div>
+<div class="navigation"><button class="btn btn-secondary" onclick="goToMainPage()">← До змісту</button><button class="btn btn-primary" onclick="showS2('s2t1')">Далі: Завдання 1 →</button></div>
+</section>
+
+<!-- ЗАВДАННЯ 1 -->
+<section class="card hidden" id="s2t1">
+<h2>🔗 Завдання 1. Зіставлення: цінність → прояв</h2>
+<div class="feedback feedback-warning mb-24"><strong>📌 Інструкція:</strong> З'єднай кожну цінність із прикладом її прояву в житті підлітка.</div>
+<div class="matching-container" id="match2">
+<div class="matching-row"><div class="matching-left">⚖️ Справедливість</div><div class="matching-arrow">→</div><select class="matching-select" id="m21" aria-label="Прояв справедливості"><option value="">Обери прояв...</option><option value="a">Не пересилати особисте повідомлення друга без дозволу</option><option value="b">Вказувати в авторах проєкту лише тих, хто справді працював</option><option value="c">Помітивши, що перебив когось, вибачитися й дати договорити</option><option value="d">Чесно сказати команді, що не встиг виконати свою частину</option></select></div>
+<div class="matching-row"><div class="matching-left">💎 Чесність</div><div class="matching-arrow">→</div><select class="matching-select" id="m22" aria-label="Прояв чесності"><option value="">Обери прояв...</option><option value="a">Не пересилати особисте повідомлення друга без дозволу</option><option value="b">Вказувати в авторах проєкту лише тих, хто справді працював</option><option value="c">Помітивши, що перебив когось, вибачитися й дати договорити</option><option value="d">Чесно сказати команді, що не встиг виконати свою частину</option></select></div>
+<div class="matching-row"><div class="matching-left">🤝 Довіра</div><div class="matching-arrow">→</div><select class="matching-select" id="m23" aria-label="Прояв довіри"><option value="">Обери прояв...</option><option value="a">Не пересилати особисте повідомлення друга без дозволу</option><option value="b">Вказувати в авторах проєкту лише тих, хто справді працював</option><option value="c">Помітивши, що перебив когось, вибачитися й дати договорити</option><option value="d">Чесно сказати команді, що не встиг виконати свою частину</option></select></div>
+<div class="matching-row"><div class="matching-left">🎯 Відповідальність</div><div class="matching-arrow">→</div><select class="matching-select" id="m24" aria-label="Прояв відповідальності"><option value="">Обери прояв...</option><option value="a">Не пересилати особисте повідомлення друга без дозволу</option><option value="b">Вказувати в авторах проєкту лише тих, хто справді працював</option><option value="c">Помітивши, що перебив когось, вибачитися й дати договорити</option><option value="d">Чесно сказати команді, що не встиг виконати свою частину</option></select></div>
+</div>
+<div id="s2t1f" class="feedback" style="display:none"></div>
+<div class="navigation"><button class="btn btn-secondary" onclick="showS2('s2Theory')">← Назад</button><button class="btn btn-primary" onclick="chkMatching('match2',{m21:'b',m22:'d',m23:'a',m24:'c'},'s2t1f','step2_task1')">✓ Перевірити</button><button class="btn btn-success" onclick="showS2('s2t2')">Далі →</button></div>
+</section>
+
+<!-- ЗАВДАННЯ 2: НОВА СИМУЛЯЦІЯ (ІЛЮСТРАЦІЯ ЗЛІВА / ПРОГРЕС СПРАВА) -->
+<section class="card hidden" id="s2t2">
+<h2>🎮 Завдання 2. Симуляція: «Алгоритм відповідальної позиції»</h2>
+
+<div class="question-highlight">
+<span class="question-highlight-icon">🤔</span>
+<div class="question-highlight-text">Твій друг Олексій збирається списати контрольну роботу з математики.</div>
+<div class="question-highlight-sub">Він просить показати свої розв'язки. Ти розумієш, що це нечесно, але не хочеш втрачати дружбу.</div>
+</div>
+
+<!-- 👉 ІЛЮСТРАЦІЯ ЛІВОРУЧ, ПАНЕЛЬ «ПРОГРЕС АНАЛІЗУ» ПРАВОРУЧ -->
+<div class="sim-top-grid">
+<div class="sim-visual">
+<div class="img-wrapper">
+<img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1792751499/27-4_dae5h5.png" alt="Учень вагається під час контрольної: друг поруч просить списати його роботу" class="situation-img" loading="lazy" onerror="this.parentElement.classList.add('img-failed')">
+<div class="img-fallback"><div>📝</div><div class="img-fallback-text">Етична дилема: чесність чи зручність?</div></div>
+</div>
+<p class="situation-caption">Одне прохання — чотири важливі запитання перед вибором</p>
+</div>
+
+<aside class="sim-progress-side" aria-label="Прогрес опрацювання алгоритму відповідальної позиції">
+<div class="sim-progress-head">
+<span class="sim-progress-title">🧭 Прогрес аналізу</span>
+<span class="sim-progress-value" id="alg2Progress">Крок 1 з 4</span>
+</div>
+<div class="sim-dots">
+<div class="alg-dot active" id="alg2Dot1">1</div>
+<div class="alg-dot" id="alg2Dot2">2</div>
+<div class="alg-dot" id="alg2Dot3">3</div>
+<div class="alg-dot" id="alg2Dot4">4</div>
+</div>
+<p class="sim-current-q" id="alg2CurrentQ">Що для тебе важливо в цій ситуації?</p>
+<div class="sim-stages">
+<div class="sim-stage active" id="alg2Stage1"><span class="sim-stage-num">1</span><span>Цінності<small>Що важливо для мене?</small></span></div>
+<div class="sim-stage" id="alg2Stage2"><span class="sim-stage-num">2</span><span>Наслідки<small>Як це вплине на інших?</small></span></div>
+<div class="sim-stage" id="alg2Stage3"><span class="sim-stage-num">3</span><span>Вибір дії<small>Як вчинити етично?</small></span></div>
+<div class="sim-stage" id="alg2Stage4"><span class="sim-stage-num">4</span><span>Виправлення<small>Як виправити помилку?</small></span></div>
+</div>
+<p class="sim-tip">💡 Обери відповідь — наступний крок відкриється автоматично. Помилка — це привід подумати ще раз.</p>
+</aside>
+</div>
+
+<!-- КРОК 1 -->
+<div class="alg-step" id="alg2Step1">
+<h3 style="color:var(--primary);margin-bottom:12px"> Крок 1. Що для тебе важливо в цій ситуації?</h3>
+<p style="margin-bottom:16px;color:var(--text-muted);font-style:italic">Перш ніж діяти, визнач свої цінності — вони стануть орієнтиром для відповідального вибору.</p>
+<div class="task-options" id="alg21">
+<div class="option" data-correct="true" data-score="3" onclick="algSel2(this,'alg21',1)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Для мене важливі чесність і справедливість. Я не хочу порушувати правила, але також ціную дружбу»</div><div class="option-explanation">✅ Чудово! Ти визначив(ла) цінності — це основа відповідальної позиції.</div></div></div>
+<div class="option" data-correct="false" data-score="1" onclick="algSel2(this,'alg21',1)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Головне — щоб Олексій не образився. Цінності тут не важливі»</div><div class="option-explanation"> Ігнорування цінностей може призвести до неетичних дій.</div></div></div>
+<div class="option" data-correct="false" data-score="0" onclick="algSel2(this,'alg21',1)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Нехай робить, що хоче — це не моя проблема»</div><div class="option-explanation">💡 Байдужість — це теж вибір, але він не допомагає ні другу, ні тобі.</div></div></div>
+</div>
+<div id="alg21f" class="feedback" style="display:none"></div>
+</div>
+
+<!-- КРОК 2 -->
+<div class="alg-step hidden" id="alg2Step2">
+<h3 style="color:var(--primary);margin-bottom:12px">❓ Крок 2. Які наслідки можуть бути у кожного варіанта?</h3>
+<p style="margin-bottom:16px;color:var(--text-muted);font-style:italic">Проаналізуй можливі наслідки своїх дій для себе, друга, класу та вчителя.</p>
+<div class="task-options" id="alg22">
+<div class="option" data-correct="false" data-score="1" onclick="algSel2(this,'alg22',2)"><div class="option-radio"></div><div class="option-text"><div class="option-label">📋 «Якщо дам списати: Олексій буде задоволений, але я порушу правила. Наслідки — можливе покарання, втрата довіри, несправедливість до інших»</div><div class="option-explanation">💡 Ти бачиш наслідки, але цей варіант не є відповідальним. Спробуй інший.</div></div></div>
+<div class="option" data-correct="true" data-score="3" onclick="algSel2(this,'alg22',2)"><div class="option-radio"></div><div class="option-text"><div class="option-label">💭 «Якщо відмовлю й поясню: друг може образитися, але я збережу чесність. Наслідки — можливість допомогти підготуватися, збереження довіри та справедливість»</div><div class="option-explanation">✅ Чудово! Ти врахував(ла) і ризики, і конструктивний вихід із ситуації.</div></div></div>
+<div class="option" data-correct="false" data-score="0" onclick="algSel2(this,'alg22',2)"><div class="option-radio"></div><div class="option-text"><div class="option-label">🙈 «Не думаю про наслідки — просто зроблю, як він просить»</div><div class="option-explanation">💡 Відсутність аналізу наслідків — шлях до невідповідальних дій.</div></div></div>
+</div>
+<div id="alg22f" class="feedback" style="display:none"></div>
+</div>
+
+<!-- КРОК 3 -->
+<div class="alg-step hidden" id="alg2Step3">
+<h3 style="color:var(--primary);margin-bottom:12px">❓ Крок 3. Яку дію ти обереш?</h3>
+<p style="margin-bottom:16px;color:var(--text-muted);font-style:italic">На основі цінностей та аналізу наслідків обери дію, яка не порушує прав і гідності інших.</p>
+<div class="task-options" id="alg23">
+<div class="option" data-correct="false" data-score="1" onclick="algSel2(this,'alg23',3)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Дам списати, щоб не конфліктувати»</div><div class="option-explanation">💡 Це порушує принципи чесності та справедливості.</div></div></div>
+<div class="option" data-correct="true" data-score="3" onclick="algSel2(this,'alg23',3)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Олексію, я розумію, що ти хвилюєшся. Але списування — це нечесно. Давай я допоможу тобі розібратися з темою перед уроком»</div><div class="option-explanation">✅ Чудово! Ти поєднав(ла) чесність із підтримкою друга — це «Я-повідомлення» без приниження.</div></div></div>
+<div class="option" data-correct="false" data-score="0" onclick="algSel2(this,'alg23',3)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Ти що, зовсім вже?! Сам готуйся, не ліз до мене!»</div><div class="option-explanation">💡 Це порушує гідність друга й не вирішує проблему.</div></div></div>
+</div>
+<div id="alg23f" class="feedback" style="display:none"></div>
+</div>
+
+<!-- КРОК 4 -->
+<div class="alg-step hidden" id="alg2Step4">
+<h3 style="color:var(--primary);margin-bottom:12px">❓ Крок 4. Що робити, якщо ти вже дав(ла) списати?</h3>
+<p style="margin-bottom:16px;color:var(--text-muted);font-style:italic">Відповідальна поведінка передбачає визнання помилок і їх виправлення.</p>
+<div class="task-options" id="alg24">
+<div class="option" data-correct="false" data-score="1" onclick="algSel2(this,'alg24',4)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Зроблю вигляд, що нічого не сталося»</div><div class="option-explanation"> Ігнорування помилки не виправляє ситуацію.</div></div></div>
+<div class="option" data-correct="false" data-score="0" onclick="algSel2(this,'alg24',4)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Це Олексій винен — він мене попросив»</div><div class="option-explanation"> Перекладання провини — це не відповідальність.</div></div></div>
+<div class="option" data-correct="true" data-score="3" onclick="algSel2(this,'alg24',4)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Олексію, я помилявся, що дав тобі списати. Це було нечесно. Давай наступного разу я допоможу тобі підготуватися заздалегідь»</div><div class="option-explanation">✅ Чудово! Ти визнав(ла) помилку й запропонував(ла) конструктивне рішення.</div></div></div>
+</div>
+<div id="alg24f" class="feedback" style="display:none"></div>
+</div>
+
+<!-- РЕЗУЛЬТАТ -->
+<div class="alg-step hidden" id="alg2Result">
+<div style="background:linear-gradient(135deg,#dcfce7,#bbf7d0);border:3px solid var(--success);border-radius:16px;padding:24px;text-align:center">
+<div style="font-size:64px;margin-bottom:12px" id="alg2ResultEmoji"></div>
+<h3 style="color:var(--primary);margin-bottom:12px" id="alg2ResultTitle">Алгоритм засвоєно!</h3>
+<p style="font-size:16px;margin-bottom:16px" id="alg2ResultText">Рівень відповідальної позиції:</p>
+<div style="font-size:48px;font-weight:800;color:var(--primary);margin-bottom:12px" id="alg2ResultScore">0/12</div>
+<div class="key-point" style="background:#fff;border-color:#86efac;color:#166534">💡 <strong>Твій алгоритм:</strong> Цінності → Наслідки → Вибір дії → Виправлення помилок</div>
+</div>
+</div>
+
+<div class="navigation">
+<button class="btn btn-secondary" onclick="showS2('s2t1')">← Назад</button>
+<button class="btn btn-warning" onclick="resetAlg2()">🔄 Почати знову</button>
+<button class="btn btn-success" onclick="showS2('s2t3')">Далі →</button>
+</div>
+</section>
+
+<!-- ЗАВДАННЯ 3 -->
+<section class="card hidden" id="s2t3">
+<h2>✅❌ Завдання 3. Правда чи брехня про цінності?</h2>
+<div class="feedback feedback-warning mb-24"><strong>📌 Інструкція:</strong> Розгорни твердження та обери — правда це чи брехня.</div>
+
+<div class="accordion-item">
+<div class="accordion-header" onclick="toggleAccordion(this)"><span>📋 «Власна позиція має формуватися лише на емоціях, без фактів»</span><span class="accordion-icon">▼</span></div>
+<div class="accordion-content"><div class="accordion-body">
+<div class="tf-container" id="s2t3q1">
+<div class="tf-card true-card" onclick="tfSel(this,'s2t3q1','true')"><div class="tf-card-icon">✅</div><div class="tf-card-title">Правда</div></div>
+<div class="tf-card false-card" onclick="tfSel(this,'s2t3q1','false')"><div class="tf-card-icon">❌</div><div class="tf-card-title">Брехня</div></div>
+</div><div id="s2t3q1f" class="feedback" style="display:none;margin-top:12px"></div>
+</div></div></div>
+
+<div class="accordion-item">
+<div class="accordion-header" onclick="toggleAccordion(this)"><span>📋 «Мовчання чи бездіяльність також є вибором»</span><span class="accordion-icon">▼</span></div>
+<div class="accordion-content"><div class="accordion-body">
+<div class="tf-container" id="s2t3q2">
+<div class="tf-card true-card" onclick="tfSel(this,'s2t3q2','true')"><div class="tf-card-icon">✅</div><div class="tf-card-title">Правда</div></div>
+<div class="tf-card false-card" onclick="tfSel(this,'s2t3q2','false')"><div class="tf-card-icon">❌</div><div class="tf-card-title">Брехня</div></div>
+</div><div id="s2t3q2f" class="feedback" style="display:none;margin-top:12px"></div>
+</div></div></div>
+
+<div class="accordion-item">
+<div class="accordion-header" onclick="toggleAccordion(this)"><span> 📋«Цінності допомагають обирати поведінку, яка не порушує прав інших»</span><span class="accordion-icon">▼</span></div>
+<div class="accordion-content"><div class="accordion-body">
+<div class="tf-container" id="s2t3q3">
+<div class="tf-card true-card" onclick="tfSel(this,'s2t3q3','true')"><div class="tf-card-icon">✅</div><div class="tf-card-title">Правда</div></div>
+<div class="tf-card false-card" onclick="tfSel(this,'s2t3q3','false')"><div class="tf-card-icon">❌</div><div class="tf-card-title">Брехня</div></div>
+</div><div id="s2t3q3f" class="feedback" style="display:none;margin-top:12px"></div>
+</div></div></div>
+
+<div id="s2t3f" class="feedback" style="display:none"></div>
+<div class="navigation"><button class="btn btn-secondary" onclick="showS2('s2t2')">← Назад</button><button class="btn btn-primary" onclick="chkTFAcc('s2t3f','step2_task3')">✓ Завершити</button><button class="btn btn-success" onclick="goToStep(3)">Далі: Крок 3 →</button></div>
+</section>
+</main>
+
+<!-- ================= КРОК 3 ================= -->
+<main class="container hidden" id="step3Page">
+<div class="step-header"><div class="step-header-top"><h2 class="step-title">🤝 Крок 3. Етична взаємодія та 5 принципів</h2><span class="step-badge">3 завдання</span></div></div>
+
+<section class="card" id="s3Theory">
+<h2>📖 Теоретичний блок</h2>
+<div class="theory-compact" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);border-color:#f9a8d4">
+<h4 style="color:#be185d"> Етичні межі</h4>
+<p><strong>Особисті межі</strong> стосуються тіла й особистого простору, почуттів і поглядів, речей, приватної інформації та права вибору.</p>
+<p><strong>Етичні межі</strong> визначають, як взаємодіяти з іншими, не порушуючи їхніх прав, гідності та приватності.</p>
+<p>Урахування потреб і позицій інших зміцнює довіру та полегшує спільну роботу. Етична співпраця передбачає повагу до внеску кожного, відкритість до діалогу та відповідальність за спільний результат.</p>
+</div>
+
+<h3 style="margin:24px 0 16px;color:var(--primary)">🛡️ 5 принципів етичної взаємодії</h3>
+<div class="theory-grid">
+<div class="theory-block block-blue"><h4>1️⃣ Гідність</h4><p>Визнавати гідність іншої людини, не принижувати й не знецінювати її.</p></div>
+<div class="theory-block block-green"><h4>2️⃣ Рівність</h4><p>Визнавати рівні права й можливості кожної людини незалежно від її відмінностей.</p></div>
+<div class="theory-block block-purple"><h4>3️⃣ Згода</h4><p>Запитувати дозволу й не нав'язувати дії, дотики або спілкування.</p></div>
+<div class="theory-block block-orange"><h4>4️⃣ Відповідальність</h4><p>Враховувати наслідки своїх слів і вчинків.</p></div>
+<div class="theory-block block-pink"><h4>5️⃣ Приватність</h4><p>Не поширювати особисту інформацію, фото чи повідомлення іншої людини без її дозволу.</p></div>
+</div>
+
+<div class="key-point">💡 <strong>Важливо!</strong> Етичність визначається не лише наміром, а й наслідками слів і вчинків. Якщо вони принижують людину або порушують її межі — така поведінка є неетичною.</div>
+<div class="navigation"><button class="btn btn-secondary" onclick="goToMainPage()">← До змісту</button><button class="btn btn-primary" onclick="showS3('s3t1')">Далі: Завдання 1 →</button></div>
+</section>
+
+<section class="card hidden" id="s3t1">
+<h2>🧩 Завдання 1. Який принцип етичної взаємодії порушено?</h2>
+<div class="feedback feedback-warning mb-24"><strong> Інструкція:</strong> Розгорни кожну ситуацію та обери порушений принцип.</div>
+
+<div class="accordion-item">
+<div class="accordion-header" onclick="toggleAccordion(this)"><span>📋 «Марія без дозволу змінила частину роботи Софії, бо вважала власний варіант кращим»</span><span class="accordion-icon">▼</span></div>
+<div class="accordion-content"><div class="accordion-body">
+<div class="task-options" id="s3t1q1">
+<div class="option" data-correct="false" onclick="selAcc(this,'s3t1q1','q1')"><div class="option-radio"></div><div class="option-text"><div class="option-label">🤝 Гідність</div></div></div>
+<div class="option" data-correct="false" onclick="selAcc(this,'s3t1q1','q1')"><div class="option-radio"></div><div class="option-text"><div class="option-label">⚖️ Рівність</div></div></div>
+<div class="option" data-correct="true" onclick="selAcc(this,'s3t1q1','q1')"><div class="option-radio"></div><div class="option-text"><div class="option-label">✅ Згода (не запитала дозволу)</div></div></div>
+<div class="option" data-correct="false" onclick="selAcc(this,'s3t1q1','q1')"><div class="option-radio"></div><div class="option-text"><div class="option-label">🔒 Приватність</div></div></div>
+</div><div id="s3t1q1f" class="feedback" style="display:none;margin-top:12px"></div>
+</div></div></div>
+
+<div class="accordion-item">
+<div class="accordion-header" onclick="toggleAccordion(this)"><span>📋 «Данило без дозволу переслав у класний чат особисте повідомлення від Ігоря»</span><span class="accordion-icon">▼</span></div>
+<div class="accordion-content"><div class="accordion-body">
+<div class="task-options" id="s3t1q2">
+<div class="option" data-correct="false" onclick="selAcc(this,'s3t1q2','q2')"><div class="option-radio"></div><div class="option-text"><div class="option-label">🤝 Гідність</div></div></div>
+<div class="option" data-correct="false" onclick="selAcc(this,'s3t1q2','q2')"><div class="option-radio"></div><div class="option-text"><div class="option-label">️ Рівність</div></div></div>
+<div class="option" data-correct="false" onclick="selAcc(this,'s3t1q2','q2')"><div class="option-radio"></div><div class="option-text"><div class="option-label">✅ Згода</div></div></div>
+<div class="option" data-correct="true" onclick="selAcc(this,'s3t1q2','q2')"><div class="option-radio"></div><div class="option-text"><div class="option-label">🔒 Приватність</div></div></div>
+</div><div id="s3t1q2f" class="feedback" style="display:none;margin-top:12px"></div>
+</div></div></div>
+
+<div class="accordion-item">
+<div class="accordion-header" onclick="toggleAccordion(this)"><span>📋 «Максим привселюдно пожартував про оцінки Дениса»</span><span class="accordion-icon">▼</span></div>
+<div class="accordion-content"><div class="accordion-body">
+<div class="task-options" id="s3t1q3">
+<div class="option" data-correct="true" onclick="selAcc(this,'s3t1q3','q3')"><div class="option-radio"></div><div class="option-text"><div class="option-label">🤝 Гідність (приниження)</div></div></div>
+<div class="option" data-correct="false" onclick="selAcc(this,'s3t1q3','q3')"><div class="option-radio"></div><div class="option-text"><div class="option-label">⚖️ Рівність</div></div></div>
+<div class="option" data-correct="false" onclick="selAcc(this,'s3t1q3','q3')"><div class="option-radio"></div><div class="option-text"><div class="option-label">✅ Згода</div></div></div>
+<div class="option" data-correct="false" onclick="selAcc(this,'s3t1q3','q3')"><div class="option-radio"></div><div class="option-text"><div class="option-label">🔒 Приватність</div></div></div>
+</div><div id="s3t1q3f" class="feedback" style="display:none;margin-top:12px"></div>
+</div></div></div>
+
+<div id="s3t1f" class="feedback" style="display:none"></div>
+<div class="navigation"><button class="btn btn-secondary" onclick="showS3('s3Theory')">← Назад</button><button class="btn btn-primary" onclick="chkAccordion('s3t1',3,'step3_task1')">✓ Завершити</button><button class="btn btn-success" onclick="showS3('s3t2')">Далі →</button></div>
+</section>
+
+<section class="card hidden" id="s3t2">
+<h2>🎮 Завдання 2. Симуляція: «Як відстоювати свої межі»</h2>
+<div class="question-highlight">
+<span class="question-highlight-icon"></span>
+<div class="question-highlight-text">Учень 10-го класу відчув, що його межі порушено.</div>
+<div class="question-highlight-sub">Однокласник привселюдно пожартував про його оцінки. Частина учнів засміялася. Учень відчув образу й сором.</div>
+</div>
+
+<div style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid #93c5fd;border-radius:14px;padding:16px;margin:16px 0">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+<strong style="color:var(--primary)">🧭 Прогрес алгоритму</strong>
+<span id="algProgress" style="font-weight:700;color:var(--accent)">Крок 1 з 4</span>
+</div>
+<div style="display:flex;gap:8px;justify-content:center">
+<div class="alg-dot active" id="algDot1">1</div>
+<div class="alg-dot" id="algDot2">2</div>
+<div class="alg-dot" id="algDot3">3</div>
+<div class="alg-dot" id="algDot4">4</div>
+</div>
+</div>
+
+<div class="alg-step" id="algStep1">
+<h3 style="color:var(--primary);margin-bottom:12px">❓ Крок 1. Звернути увагу на дискомфорт учня</h3>
+<div class="task-options" id="alg1">
+<div class="option" data-correct="true" data-score="3" onclick="algSel(this,'alg1',1)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Учень відчуває образу й сором. Це сигнал, що його межі порушено»</div><div class="option-explanation">✅ Усвідомлення емоції — перший крок до захисту меж.</div></div></div>
+<div class="option" data-correct="false" data-score="1" onclick="algSel(this,'alg1',1)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Та нічого, він просто пожартував — не варто звертати увагу»</div><div class="option-explanation">💡 Ігнорування дискомфорту не зупиняє порушення меж.</div></div></div>
+<div class="option" data-correct="false" data-score="0" onclick="algSel(this,'alg1',1)"><div class="option-radio"></div><div class="option-text"><div class="option-label">Одразу кинутися у відповідь: «Зараз я йому покажу!»</div><div class="option-explanation">💡 Реакція під впливом емоцій може погіршити ситуацію.</div></div></div>
+</div><div id="alg1f" class="feedback" style="display:none"></div>
+</div>
+
+<div class="alg-step hidden" id="algStep2">
+<h3 style="color:var(--primary);margin-bottom:12px">❓ Крок 2. Спокійно назвати, що неприємно</h3>
+<div class="task-options" id="alg2">
+<div class="option" data-correct="true" data-score="3" onclick="algSel(this,'alg2',2)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Мені неприємно, коли ти жартуєш про мої оцінки при всіх. Будь ласка, не роби так»</div><div class="option-explanation">✅ Це «Я-повідомлення» — чітко, без приниження.</div></div></div>
+<div class="option" data-correct="false" data-score="1" onclick="algSel(this,'alg2',2)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Ти що, зовсім вже?! Сам ти виглядаєш гірше!»</div><div class="option-explanation">💡 Зустрічне приниження порушує межі іншого.</div></div></div>
+<div class="option" data-correct="false" data-score="0" onclick="algSel(this,'alg2',2)"><div class="option-radio"></div><div class="option-text"><div class="option-label">Промовчати й зробити вигляд, що все нормально</div><div class="option-explanation">💡 Мовчання сприймається як дозвіл продовжувати.</div></div></div>
+</div><div id="alg2f" class="feedback" style="display:none"></div>
+</div>
+
+<div class="alg-step hidden" id="algStep3">
+<h3 style="color:var(--primary);margin-bottom:12px">❓ Крок 3. Пояснити, якої поведінки очікуєш</h3>
+<div class="task-options" id="alg3">
+<div class="option" data-correct="false" data-score="1" onclick="algSel(this,'alg3',3)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Просто відчепися від мене»</div><div class="option-explanation">💡 Неясно, якої саме поведінки учень очікує.</div></div></div>
+<div class="option" data-correct="true" data-score="3" onclick="algSel(this,'alg3',3)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Якщо хочеш обговорити моє навчання — давай наодинці. А при інших — утримайся від таких жартів»</div><div class="option-explanation">✅ Конкретне прохання + альтернатива.</div></div></div>
+<div class="option" data-correct="false" data-score="0" onclick="algSel(this,'alg3',3)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Я зараз піду і поскаржусь учительці!»</div><div class="option-explanation">💡 Погроза без спроби діалогу — ескалація.</div></div></div>
+</div><div id="alg3f" class="feedback" style="display:none"></div>
+</div>
+
+<div class="alg-step hidden" id="algStep4">
+<h3 style="color:var(--primary);margin-bottom:12px">❓ Крок 4. Якщо ситуація не змінюється — звернутись по допомогу</h3>
+<div class="task-options" id="alg4">
+<div class="option" data-correct="true" data-score="3" onclick="algSel(this,'alg4',4)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Поговорити з класним керівником, психологом або батьками — це не слабкість, а відповідальність за себе»</div><div class="option-explanation">✅ Звернення по допомогу — ознака сили, а не слабкості.</div></div></div>
+<div class="option" data-correct="false" data-score="1" onclick="algSel(this,'alg4',4)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Терпіти далі — може, сам заспокоїться»</div><div class="option-explanation">💡 Терпіння не зупиняє систематичне порушення меж.</div></div></div>
+<div class="option" data-correct="false" data-score="0" onclick="algSel(this,'alg4',4)"><div class="option-radio"></div><div class="option-text"><div class="option-label">«Помститися йому тим самим — нехай відчує»</div><div class="option-explanation">💡 Помста створює новий цикл порушення меж.</div></div></div>
+</div><div id="alg4f" class="feedback" style="display:none"></div>
+</div>
+
+<div class="alg-step hidden" id="algResult">
+<div style="background:linear-gradient(135deg,#dcfce7,#bbf7d0);border:3px solid var(--success);border-radius:16px;padding:24px;text-align:center">
+<div style="font-size:64px;margin-bottom:12px" id="resultEmoji">🏆</div>
+<h3 style="color:var(--primary);margin-bottom:12px" id="resultTitle">Алгоритм засвоєно!</h3>
+<p style="font-size:16px;margin-bottom:16px" id="resultText">Рівень захисту меж:</p>
+<div style="font-size:48px;font-weight:800;color:var(--primary)" id="resultScore">0/12</div>
+<div class="key-point" style="background:#fff;border-color:#86efac;color:#166534">💡 <strong>Алгоритм:</strong> Помітити емоцію → Назвати межі → Пояснити очікування → Звернутись по допомогу</div>
+</div>
+</div>
+
+<div class="navigation">
+<button class="btn btn-secondary" onclick="showS3('s3t1')">← Назад</button>
+<button class="btn btn-warning" onclick="resetAlg()">🔄 Почати знову</button>
+<button class="btn btn-success" onclick="showS3('s3t3')">Далі →</button>
+</div>
+</section>
+
+<section class="card hidden" id="s3t3">
+<h2>✅❌ Завдання 3. Незгода чи порушення меж?</h2>
+<div class="feedback feedback-warning mb-24"><strong> Інструкція:</strong> Визнач, що є просто незгодою, а що — порушенням етичних меж.</div>
+<div class="yn-grid" id="ynGrid3">
+<div class="yn-row"><div class="yn-question">💬 «Я не згоден із твоєю думкою щодо цього фільму, мені він не сподобався»</div><div class="yn-buttons">
+<button class="yn-btn" data-yn="s3t3_1" data-value="yes" onclick="ynSelV2(this)">Незгода</button>
+<button class="yn-btn" data-yn="s3t3_1" data-value="no" onclick="ynSelV2(this)">Порушення меж</button></div></div>
+<div class="yn-row"><div class="yn-question">💬 «Твоя думка взагалі нікого не цікавить, ти в цьому нічого не тямиш»</div><div class="yn-buttons">
+<button class="yn-btn" data-yn="s3t3_2" data-value="yes" onclick="ynSelV2(this)">Незгода</button>
+<button class="yn-btn" data-yn="s3t3_2" data-value="no" onclick="ynSelV2(this)">Порушення меж</button></div></div>
+<div class="yn-row"><div class="yn-question">💬 «Я не буду давати свій конспект, бо сама готуюся до уроку»</div><div class="yn-buttons">
+<button class="yn-btn" data-yn="s3t3_3" data-value="yes" onclick="ynSelV2(this)">Незгода</button>
+<button class="yn-btn" data-yn="s3t3_3" data-value="no" onclick="ynSelV2(this)">Порушення меж</button></div></div>
+<div class="yn-row"><div class="yn-question">💬 «Якщо ти не даси мені списати, ми з тобою більше не спілкуємося»</div><div class="yn-buttons">
+<button class="yn-btn" data-yn="s3t3_4" data-value="yes" onclick="ynSelV2(this)">Незгода</button>
+<button class="yn-btn" data-yn="s3t3_4" data-value="no" onclick="ynSelV2(this)">Порушення меж</button></div></div>
+</div>
+<div id="s3t3f" class="feedback" style="display:none"></div>
+<div class="navigation"><button class="btn btn-secondary" onclick="showS3('s3t2')">← Назад</button><button class="btn btn-primary" onclick="chkYnV2('ynGrid3',4,'s3t3f','step3_task3')">✓ Перевірити</button><button class="btn btn-success" onclick="goToStep(4)">Далі: Крок 4 →</button></div>
+</section>
+</main>
+
+<!-- ================= КРОК 4 ================= -->
+<main class="container hidden" id="step4Page">
+<div class="step-header"><div class="step-header-top"><h2 class="step-title">⚠️ Крок 4. Наслідки порушення етичних меж</h2><span class="step-badge">3 завдання</span></div></div>
+
+<section class="card" id="s4Theory">
+<h2>📖 Теоретичний блок</h2>
+<div class="theory-compact" style="background:linear-gradient(135deg,#fee2e2,#fecaca);border-color:#fca5a5">
+<h4 style="color:#991b1b">️ Наслідки порушення етичних меж</h4>
+<p>Порушення етичних норм має наслідки не лише для безпосередніх учасників. Образи, приниження, поширення приватної інформації та бездіяльність свідків впливають на близьких людей, атмосферу в колективі й суспільні відносини.</p>
+<p><strong>Якщо неетична поведінка залишається без належної реакції, вона може почати сприйматися як допустима.</strong></p>
+</div>
+<div class="quote-block">Незгода сама по собі не є порушенням меж. Неетичною взаємодія стає тоді, коли думку людини знецінюють, її примушують, принижують або позбавляють права вибору.</div>
+<h3 style="margin:24px 0 16px;color:var(--primary)">🔄 Алгоритм визнання наслідків і виправлення</h3>
+<div class="theory-grid">
+<div class="theory-block block-blue"><h4>1️⃣ Вислухай</h4><p>Не перебивай, уточни, що саме було неприємним.</p></div>
+<div class="theory-block block-green"><h4>2️ Визнай наслідки</h4><p>Не заперечуй і не перекладай провину.</p></div>
+<div class="theory-block block-purple"><h4>3️⃣ Перепроси</h4><p>«Вибач, я цього не врахував/врахувала».</p></div>
+<div class="theory-block block-orange"><h4>4️⃣ Зміни поведінку</h4><p>«Більше так не робитиму» — і дійсно не роби.</p></div>
+</div>
+<div class="navigation"><button class="btn btn-secondary" onclick="goToMainPage()">← До змісту</button><button class="btn btn-primary" onclick="showS4('s4t1')">Далі: Завдання 1 →</button></div>
+</section>
+
+<section class="card hidden" id="s4t1">
+<h2>🔗 Завдання 1. Алгоритм виправлення помилки</h2>
+<div class="feedback feedback-warning mb-24">
+<strong>📌 Інструкція:</strong> Спочатку натисни на назву кроку в лівій колонці, потім на його опис у правій. Правильні пари підсвітиться зеленим.<strong>  На телефоні:</strong> елементи розташовані один під одним. Спочатку обери назву кроку (зверху), потім — його опис (знизу).
+</div>
+</div>
+<div class="two-col-matching" id="twoColMatch">
+<div class="col-left">
+<div class="col-header">📋 Назва кроку</div>
+<div class="match-item" data-pair="1" onclick="matchSel(this,'left')"><span class="match-item-number">1</span>Вислухай</div>
+<div class="match-item" data-pair="2" onclick="matchSel(this,'left')"><span class="match-item-number">2</span>Визнай наслідки</div>
+<div class="match-item" data-pair="3" onclick="matchSel(this,'left')"><span class="match-item-number">3</span>Перепроси</div>
+<div class="match-item" data-pair="4" onclick="matchSel(this,'left')"><span class="match-item-number">4</span>Зміни поведінку</div>
+</div>
+<div class="col-right">
+<div class="col-header">📝 Опис кроку</div>
+<div class="match-item" data-pair="3" onclick="matchSel(this,'right')"><span class="match-item-number">A</span>«Вибач, я цього не врахував/врахувала»</div>
+<div class="match-item" data-pair="1" onclick="matchSel(this,'right')"><span class="match-item-number">B</span>Не перебивай, уточни, що саме було неприємним</div>
+<div class="match-item" data-pair="4" onclick="matchSel(this,'right')"><span class="match-item-number">C</span>«Більше так не робитиму» — і дійсно не роби</div>
+<div class="match-item" data-pair="2" onclick="matchSel(this,'right')"><span class="match-item-number">D</span>Не заперечуй і не перекладай провину</div>
+</div>
+</div>
+<div id="s4t1f" class="feedback" style="display:none"></div>
+<div class="navigation"><button class="btn btn-secondary" onclick="showS4('s4Theory')">← Назад</button><button class="btn btn-primary" onclick="chkTwoCol('step4_task1')">✓ Перевірити</button><button class="btn btn-success" onclick="showS4('s4t2')">Далі →</button></div>
+</section>
+<section class="card hidden" id="s4t2">
+<h2>🎭 Завдання 2. Аналіз ситуації: Захар і команда</h2>
+<div class="feedback feedback-warning mb-24"><strong>📌 Ситуація:</strong> Захар не виконав свою частину завдання й не попередив команду, через що учні не встигли завершити проєкт.</div>
+<div class="situation-layout">
+<div class="situation-illustration-left">
+<div class="img-wrapper">
+<img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1792751499/27-5_urns1d.png" alt="Захар стоїть осторонь, команда розчарована через незавершений проєкт" class="situation-img" loading="lazy" onerror="this.parentElement.classList.add('img-failed')">
+<div class="img-fallback"><div>⚠️</div><div class="img-fallback-text">Наслідки невідповідальності в команді</div></div>
+</div>
+</div>
+<div>
+<p style="margin:12px 0;color:var(--text-muted);font-style:italic">📌 <strong>Які етичні принципи порушив Захар? (Обери 3)</strong></p>
+<div class="task-options" id="s4t2">
+<div class="option" data-correct="true" onclick="tog(this)"><div class="option-checkbox"></div><div class="option-text"><div class="option-label">💎 Чесність — не попередив про проблему заздалегідь</div></div></div>
+<div class="option" data-correct="true" onclick="tog(this)"><div class="option-checkbox"></div><div class="option-text"><div class="option-label">🎯 Відповідальність — не виконав свою частину роботи</div></div></div>
+<!-- ВИПРАВЛЕНО: тепер це опис дії, якої Захар НЕ робив, тому учень зрозуміє, що обирати цей варіант не треба -->
+<div class="option" data-correct="false" onclick="tog(this)"><div class="option-checkbox"></div><div class="option-text"><div class="option-label">🔒 Приватність — поширив особисті дані або секрети членів команди</div></div></div>
+<div class="option" data-correct="true" onclick="tog(this)"><div class="option-checkbox"></div><div class="option-text"><div class="option-label">🤝 Повага — знецінив час і зусилля інших учасників</div></div></div>
+</div>
+</div></div>
+<div id="s4t2f" class="feedback" style="display:none"></div>
+<div class="navigation"><button class="btn btn-secondary" onclick="showS4('s4t1')">← Назад</button><button class="btn btn-primary" onclick="chkMulti('s4t2','s4t2f',3,'step4_task2')">✓ Перевірити</button><button class="btn btn-success" onclick="showS4('s4t3')">Далі →</button></div>
+</section>
+<section class="card hidden" id="s4t3">
+<h2>💬 Завдання 3. Конструктор відповіді: що мав би зробити Захар?</h2>
+<div class="feedback feedback-warning mb-24"><strong>📌 Завдання:</strong> Обери 3 репліки, які демонструють відповідальне визнання помилки.</div>
+<div class="task-options" id="s4t3">
+<div class="option" data-correct="true" onclick="tog(this)"><div class="option-checkbox"></div><div class="option-text"><div class="option-label">💬 «Вибачте, я не впорався і не попередив. Я розумію, що підвів вас. Давайте обговоримо, як я можу це компенсувати»</div></div></div>
+<div class="option" data-correct="false" onclick="tog(this)"><div class="option-checkbox"></div><div class="option-text"><div class="option-label">😐 «Та ви самі винні — треба було нагадати»</div></div></div>
+<div class="option" data-correct="true" onclick="tog(this)"><div class="option-checkbox"></div><div class="option-text"><div class="option-label">🤝 «Я визнаю, що це моя помилка. Наступного разу попереджу заздалегідь»</div></div></div>
+<div class="option" data-correct="false" onclick="tog(this)"><div class="option-checkbox"></div><div class="option-text"><div class="option-label">😐 «Та я взагалі не хотів цей проєкт робити»</div></div></div>
+<div class="option" data-correct="true" onclick="tog(this)"><div class="option-checkbox"></div><div class="option-text"><div class="option-label">🔄 «Я зараз допрацюю свою частину, навіть якщо це займе більше часу»</div></div></div>
+</div>
+<div id="s4t3f" class="feedback" style="display:none"></div>
+<div class="navigation"><button class="btn btn-secondary" onclick="showS4('s4t2')">← Назад</button><button class="btn btn-primary" onclick="chkMulti('s4t3','s4t3f',3,'step4_task3')">✓ Перевірити</button><button class="btn btn-success" onclick="goToStep(5)">Далі: Крок 5 →</button></div>
+</section>
+</main>
+
+<!-- ================= КРОК 5 ================= -->
+<main class="container hidden" id="step5Page">
+<div class="step-header"><div class="step-header-top"><h2 class="step-title">🛡️ Крок 5. Дискримінація і булінг</h2><span class="step-badge">3 завдання</span></div></div>
+
+<section class="card" id="s5Theory">
+<h2>📖 Теоретичний блок</h2>
+<div class="theory-compact" style="background:linear-gradient(135deg,#fee2e2,#fecaca);border-color:#fca5a5">
+<h4 style="color:#991b1b">🛡️ Дискримінація та булінг</h4>
+<p><strong>Дискримінація</strong> — це порушення прав людини через її стать, вік, походження, стан здоров'я, переконання, сімейний чи майновий стан та інші ознаки.</p>
+<p><strong>Булінг (цькування)</strong> — це не просто сварка, а систематичний тиск і знущання (фізичне, психологічне чи в соцмережах), де сили учасників нерівні.</p>
+</div>
+<div class="key-point">💡 <strong>Важливо!</strong> Не кожне різне ставлення є дискримінацією. Вона виникає тоді, коли людину безпідставно обмежують у правах або можливостях через певну ознаку.</div>
+
+<h3 style="margin:24px 0 16px;color:var(--primary)"> Ролі в ситуації булінгу</h3>
+<p style="margin-bottom:16px;color:var(--text-muted)">💡 <strong>Натисни на картку</strong>, щоб дізнатися більше про кожну роль.</p>
+<div class="theory-grid">
+<div class="ei-card card" tabindex="0" role="button" aria-expanded="false" aria-label="Агресор — розгорнути" onclick="toggleEICard(this)">
+<div class="ei-card-header" style="background:linear-gradient(135deg,#fee2e2,#fecaca)"><div class="ei-card-icon">😠</div><div class="ei-card-title">Агресор</div><div class="ei-card-subtitle">Ініціатор булінгу</div></div>
+<div class="ei-card-content"><div class="ei-card-section"><h5>📖 Хто це?</h5><p>Людина, яка ініціює цькування та тиск, використовує силу чи авторитет для домінування.</p></div><div class="ei-card-section"><h5>⚠️ Наслідки</h5><ul><li data-icon="⚖️">Від 16 років — особиста відповідальність</li><li data-icon="‍👩‍👧">За дії осіб 14–16 років відповідають батьки</li><li data-icon="">Руйнування довіри та стосунків</li></ul></div></div>
+<span class="ei-card-hint">🔽 Натисни, щоб розгорнути</span></div>
+
+<div class="ei-card card" tabindex="0" role="button" aria-expanded="false" aria-label="Жертва — розгорнути" onclick="toggleEICard(this)">
+<div class="ei-card-header" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8)"><div class="ei-card-icon">😔</div><div class="ei-card-title">Жертва</div><div class="ei-card-subtitle">Та, щодо кого чинять булінг</div></div>
+<div class="ei-card-content"><div class="ei-card-section"><h5> Хто це?</h5><p>Людина, яка зазнає систематичних нападів чи ізоляції, потребує підтримки та захисту.</p></div><div class="ei-card-section"><h5>️ Як захистити себе?</h5><ul><li data-icon="️">Говорити дорослим, яким довіряєш</li><li data-icon="📞">116-111, 15-47, 102, 112</li><li data-icon="">Безпека в закладі освіти</li><li data-icon="💚">Психологічна підтримка</li></ul></div></div>
+<span class="ei-card-hint">🔽 Натисни, щоб розгорнути</span></div>
+
+<div class="ei-card card" tabindex="0" role="button" aria-expanded="false" aria-label="Спостерігачі — розгорнути" onclick="toggleEICard(this)">
+<div class="ei-card-header" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)"><div class="ei-card-icon">👀</div><div class="ei-card-title">Спостерігачі</div><div class="ei-card-subtitle">Свідки ситуації</div></div>
+<div class="ei-card-content"><div class="ei-card-section"><h5>📖 Хто це?</h5><p>Люди, які бачать ситуацію з боку. Вони можуть посилити цькування або допомогти його припинити.</p></div><div class="ei-card-section"><h5>️ Роль свідків</h5><ul><li data-icon="✅">Підтримати жертву</li><li data-icon="✅">Повідомити дорослим</li><li data-icon="❌">Мовчання сприймається як дозвіл</li><li data-icon="❌">Жертва залишається наодинці з проблемою</li></ul></div></div>
+<span class="ei-card-hint">🔽 Натисни, щоб розгорнути</span></div>
+
+<div class="ei-card card" tabindex="0" role="button" aria-expanded="false" aria-label="Ті, хто підтримує булінг — розгорнути" onclick="toggleEICard(this)">
+<div class="ei-card-header" style="background:linear-gradient(135deg,#ffedd5,#fed7aa)"><div class="ei-card-icon">😈</div><div class="ei-card-title">Ті, хто підтримує</div><div class="ei-card-subtitle">Підсилюють булінг</div></div>
+<div class="ei-card-content"><div class="ei-card-section"><h5>📖 Хто це?</h5><p>Люди, які підтримують агресора діями, сміхом чи коментарями, повторюючи образи.</p></div><div class="ei-card-section"><h5>️ Наслідки</h5><ul><li data-icon="⚖️">Несуть відповідальність разом з агресором</li><li data-icon="💔">Руйнують довіру та безпеку</li><li data-icon="🔄">Створюють цикл насильства</li></ul></div></div>
+<span class="ei-card-hint">🔽 Натисни, щоб розгорнути</span></div>
+</div>
+
+<h3 style="margin:24px 0 16px;color:var(--primary)">⚖️ Відповідальність та захист</h3>
+<div class="theory-grid">
+<div class="theory-block block-purple"><h4>⚖️ Відповідальність</h4><ul><li data-icon="🔞">Від 16 років — особиста відповідальність (штраф або громадські роботи)</li><li data-icon="👨‍‍👧">За дії осіб 14–16 років відповідають батьки</li></ul></div>
+<div class="theory-block block-green"><h4>🛡️ Захист</h4><ul><li data-icon="🏫">Безпека в закладі освіти</li><li data-icon="👮">Реагування школи і поліції</li><li data-icon="💚">Психологічна підтримка</li><li data-icon="📞">116-111, 15-47, 102, 112</li></ul></div>
+</div>
+<div class="navigation"><button class="btn btn-secondary" onclick="goToMainPage()">← До змісту</button><button class="btn btn-primary" onclick="showS5('s5t1')">Далі: Завдання 1 →</button></div>
+</section>
+
+<section class="card hidden" id="s5t1">
+<h2>🎭 Завдання 1. Аналіз ситуації: Олеся</h2>
+<div class="feedback feedback-warning mb-24"><strong>📌 Ситуація:</strong> У 10-му класі кілька учнів із заможних родин щодня висміювали нову однокласницю Олесю через її недорогий одяг. Вони не брали дівчину до спільних проєктів і не дозволяли їй сідати поруч із ними в їдальні. Згодом учні без дозволу поширили в чаті її фото зі зневажливими коментарями про майновий стан родини. Директор не вжив заходів для припинення цькування, а порадив Олесі перейти до іншої школи.</div>
+<div class="situation-layout">
+<div class="situation-illustration-left">
+<div class="img-wrapper">
+<img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1792751524/27-6_rzijsk.png" alt="Олеся ізольована від класу; у чаті поширюють її фото зі зневажливими коментарями" class="situation-img" loading="lazy" onerror="this.parentElement.classList.add('img-failed')">
+</div>
+</div>
+<div>
+<p style="margin:12px 0;color:var(--text-muted);font-style:italic">📌 <strong>Які прояви булінгу, кібербулінгу та дискримінації ти бачиш? (Обери 4)</strong></p>
+<div class="task-options" id="s5t1">
+<div class="option" data-correct="true" onclick="tog(this)"><div class="option-checkbox"></div><div class="option-text"><div class="option-label">🚫 Ізоляція — не брали до проєктів, не дозволяли сідати поруч</div></div></div>
+<div class="option" data-correct="true" onclick="tog(this)"><div class="option-checkbox"></div><div class="option-text"><div class="option-label">⚖️ Дискримінація за майновим станом</div></div></div>
+<div class="option" data-correct="false" onclick="tog(this)"><div class="option-checkbox"></div><div class="option-text"><div class="option-label">😐 Це просто конфлікт між підлітками — нічого серйозного</div></div></div>
+<div class="option" data-correct="true" onclick="tog(this)"><div class="option-checkbox"></div><div class="option-text"><div class="option-label">🎭 Психологічний булінг — висміювання через одяг</div></div></div>
+<div class="option" data-correct="true" onclick="tog(this)"><div class="option-checkbox"></div><div class="option-text"><div class="option-label">📱 Кібербулінг — поширення фото зі зневажливими коментарями</div></div></div>
+</div>
+</div></div>
+<div id="s5t1f" class="feedback" style="display:none"></div>
+<div class="navigation"><button class="btn btn-secondary" onclick="showS5('s5Theory')">← Назад</button><button class="btn btn-primary" onclick="chkMulti('s5t1','s5t1f',4,'step5_task1')">✓ Перевірити</button><button class="btn btn-success" onclick="showS5('s5t2')">Далі →</button></div>
+</section>
+
+<section class="card hidden" id="s5t2">
+<h2>🧩 Завдання 2. Класифікація: хто є хто в булінгу?</h2>
+<div class="feedback feedback-warning mb-24"><strong>📌 Інструкція:</strong> Для кожної поведінки обери роль у ситуації булінгу.</div>
+<div class="matching-container" id="match5">
+<div class="matching-row"><div class="matching-left">😠 Систематично ображає однокласника</div><div class="matching-arrow">→</div><select class="matching-select" id="m51" aria-label="Роль: ініціатор цькування"><option value="">Обери роль...</option><option value="a">👀 Спостерігач</option><option value="b">😠 Агресор</option><option value="c">😔 Жертва</option><option value="d">😈 Той, хто підтримує</option></select></div>
+<div class="matching-row"><div class="matching-left">😔 Зазнає постійного тиску</div><div class="matching-arrow">→</div><select class="matching-select" id="m52" aria-label="Роль: той, хто зазнає цькування"><option value="">Обери роль...</option><option value="a">👀 Спостерігач</option><option value="b">😠 Агресор</option><option value="c">😔 Жертва</option><option value="d">😈 Той, хто підтримує</option></select></div>
+<div class="matching-row"><div class="matching-left">😈 Сміється з жартів агресора</div><div class="matching-arrow">→</div><select class="matching-select" id="m53" aria-label="Роль: підтримує цькування"><option value="">Обери роль...</option><option value="a">👀 Спостерігач</option><option value="b">😠 Агресор</option><option value="c">😔 Жертва</option><option value="d">😈 Той, хто підтримує</option></select></div>
+<div class="matching-row"><div class="matching-left">👀 Бачить ситуацію й може допомогти її припинити</div><div class="matching-arrow">→</div><select class="matching-select" id="m54" aria-label="Роль: свідок"><option value="">Обери роль...</option><option value="a">👀 Спостерігач</option><option value="b">😠 Агресор</option><option value="c">😔 Жертва</option><option value="d">😈 Той, хто підтримує</option></select></div>
+</div>
+<div id="s5t2f" class="feedback" style="display:none"></div>
+<div class="navigation"><button class="btn btn-secondary" onclick="showS5('s5t1')">← Назад</button><button class="btn btn-primary" onclick="chkMatching('match5',{m51:'b',m52:'c',m53:'d',m54:'a'},'s5t2f','step5_task2')">✓ Перевірити</button><button class="btn btn-success" onclick="showS5('s5t3')">Далі →</button></div>
+</section>
+
+<section class="card hidden" id="s5t3">
+<h2> Завдання 3. Чи нейтральний спостерігач?</h2>
+<div class="feedback feedback-warning mb-24"><strong>📌 Твердження:</strong> «Мовчання спостерігача — нейтральна позиція, яка не впливає на ситуацію булінгу».</div>
+<div class="task-options" id="s5t3">
+<div class="option" data-correct="false" onclick="sel(this,'s5t3')"><div class="option-radio"></div><div class="option-text"><div class="option-label">✅ Згоден/а: спостерігач не бере участі, тому не впливає</div></div></div>
+<div class="option" data-correct="true" onclick="sel(this,'s5t3')"><div class="option-radio"></div><div class="option-text"><div class="option-label">❌ Не згоден/а: мовчання сприймається агресором як дозвіл, а жертвою — як залишення наодинці з проблемою</div></div></div>
+<div class="option" data-correct="false" onclick="sel(this,'s5t3')"><div class="option-radio"></div><div class="option-text"><div class="option-label">😐 Це залежить від обставин — іноді мовчати правильно</div></div></div>
+</div>
+<div id="s5t3f" class="feedback" style="display:none"></div>
+<div class="navigation"><button class="btn btn-secondary" onclick="showS5('s5t2')">← Назад</button><button class="btn btn-primary" onclick="chk('s5t3','step5_task3')">✓ Перевірити</button><button class="btn btn-success" onclick="goToStep(6)">Далі: Самооцінювання →</button></div>
+</section>
+</main>
+
+<!-- ================= КРОК 6 ================= -->
+<main class="container hidden" id="step6Page">
+<div class="step6-header"><h2>🎉 Вітаємо! Ти завершив(ла) параграф!</h2><p>Час дізнатися свій рівень</p></div>
+<div class="card">
+<h2>⭐ Оціни свої вміння</h2>
+<div class="skill-eval"><div class="skill-title">🧭 Я можу відрізнити власну думку чи незгоду від порушення етичних меж, дискримінації та булінгу</div><div class="star-rating" data-skill="1"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div></div>
+<div class="skill-eval"><div class="skill-title">️⚖️ Я розумію наслідки дискримінації та знаю, як реагувати на порушення прав людини</div><div class="star-rating" data-skill="2"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div></div>
+<div class="skill-eval"><div class="skill-title">️🛡️ Я знаю, як захистити власні межі та відстоювати власні позиції</div><div class="star-rating" data-skill="3"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div></div>
+<div class="skill-eval"><div class="skill-title">💬 Я вмію висловлювати незгоду, не принижуючи інших</div><div class="star-rating" data-skill="4"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div></div>
+<div class="skill-eval"><div class="skill-title">🤝 Я розумію роль свідка в ситуації булінгу та знаю, як діяти відповідально</div><div class="star-rating" data-skill="5"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div></div>
+</div>
+<div class="stats-grid">
+<div class="stat-card"><div class="stat-value" id="statTasks">0/14</div><div class="stat-label">✅ Виконано</div></div>
+<div class="stat-card"><div class="stat-value" id="statCorrect">0</div><div class="stat-label">🎯 Правильних відповідей</div></div>
+<div class="stat-card"><div class="stat-value" id="statSteps">0/5</div><div class="stat-label">📍 Кроків</div></div>
+<div class="stat-card"><div class="stat-value" id="statAccuracy">0%</div><div class="stat-label">🎯 Точність</div></div>
+</div>
+<div class="progress-circle-container"><div class="progress-circle" id="progressCircle"><div class="progress-circle-inner"><div class="circle-percentage" id="circlePercentage">0%</div><div class="circle-label">Прогрес</div></div></div></div>
+<div style="text-align:center"><div class="level-badge"><div class="level-badge-icon">⭐</div><div><div class="level-badge-title" id="finalLevelTitle">Початківець</div><div class="level-badge-desc" id="finalLevelDesc">⭐☆☆☆☆</div></div></div></div>
+<div class="tip-card">💡 <strong>Цінності є внутрішнім орієнтиром, який допомагає людині обирати поведінку в різних життєвих ситуаціях.</strong><br>🌱 Відповідальна поведінка передбачає діяти відповідно до своїх цінностей, прогнозувати наслідки й за потреби виправляти помилки.</div>
+<div class="navigation"><button class="btn btn-warning" onclick="resetProgress()">🔄 Пройти ще раз</button><button class="btn btn-primary" onclick="goToMainPage()">🏠 На головну</button></div>
+</main>
+
+<!-- ================= МОДАЛКИ ================= -->
+<div class="modal-overlay" id="progressModal" role="dialog" aria-modal="true" aria-labelledby="pTitle">
+<div class="modal">
+<div class="modal-header"><h2 id="pTitle">📊 Мій прогрес</h2><button class="modal-close" onclick="closeModal('progressModal')" aria-label="Закрити">✕</button></div>
+<div class="text-center">
+<div style="font-size:44px;margin-bottom:16px" id="mEmoji">⭐☆☆☆☆</div>
+<h3 style="color:var(--primary);margin-bottom:24px" id="mName">Початківець</h3>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px">
+<div style="background:var(--bg);padding:14px;border-radius:12px"><div style="font-size:24px;font-weight:700;color:var(--accent)" id="mT">0/14</div><div style="font-size:12px;color:var(--text-muted)">Завдань</div></div>
+<div style="background:var(--bg);padding:14px;border-radius:12px"><div style="font-size:24px;font-weight:700;color:var(--success)" id="mC">0</div><div style="font-size:12px;color:var(--text-muted)">Правильних</div></div>
+<div style="background:var(--bg);padding:14px;border-radius:12px"><div style="font-size:24px;font-weight:700;color:var(--warning)" id="mS">0/5</div><div style="font-size:12px;color:var(--text-muted)">Кроків</div></div>
+<div style="background:var(--bg);padding:14px;border-radius:12px"><div style="font-size:24px;font-weight:700;color:var(--primary)" id="mA">0%</div><div style="font-size:12px;color:var(--text-muted)">Точність</div></div>
+</div>
+<div style="background:var(--border);height:12px;border-radius:6px;overflow:hidden;margin-bottom:12px"><div id="mBar" style="height:100%;background:linear-gradient(90deg,var(--accent),var(--success));width:0%;transition:width .5s"></div></div>
+<p style="font-weight:600;color:var(--primary)">Прогрес: <span id="mP">0%</span></p>
+</div>
+<button class="btn btn-primary mt-24" style="width:100%" onclick="closeModal('progressModal')">Продовжити навчання →</button>
+</div></div>
+
+<div class="modal-overlay" id="helpModal" role="dialog" aria-modal="true" aria-labelledby="hTitle">
+<div class="modal">
+<div class="modal-header"><h2 id="hTitle">❓ Як працювати</h2><button class="modal-close" onclick="closeModal('helpModal')" aria-label="Закрити">✕</button></div>
+<ul class="feature-list">
+<li data-icon="🚀"><strong>Як почати?</strong><br>Натисни «Розпочати параграф». Кроками можна керувати вільно.</li>
+<li data-icon="✅"><strong>Форми завдань:</strong><br>Тести, множинний вибір, зіставлення, інтерактивні картки, симуляції, дві колонки, правда/брехня, так/ні.</li>
+<li data-icon="🎮"><strong>Симуляції:</strong><br>Обдумуй ситуацію, обери відповідь. Помилка не закриває шлях — спробуй ще раз.</li>
+<li data-icon=""><strong>Прогрес:</strong><br>Зберігається автоматично. Натисни 📊 для перегляду статистики.</li>
+<li data-icon="️"><strong>З клавіатури:</strong><br>Tab — переміщення, Enter/Space — вибір, Escape — закриття вікна.</li>
+</ul>
+<button class="btn btn-primary mt-24" style="width:100%" onclick="closeModal('helpModal')">Зрозуміло!</button>
+</div></div>
+<script>
+/* ==================== СТАН ==================== */
+var STORAGE_KEY = 'navigator27_v4_fixed'; // Змініть ключ, щоб скинути старі биті дані
+var TOTAL_TASKS = 14;
+var ST = {
+    step1:{t:1,c:0,tasks:{task1:0}},
+    step2:{t:3,c:0,tasks:{task1:0,task2:0,task3:0}},
+    step3:{t:3,c:0,tasks:{task1:0,task2:0,task3:0}},
+    step4:{t:3,c:0,tasks:{task1:0,task2:0,task3:0}},
+    step5:{t:3,c:0,tasks:{task1:0,task2:0,task3:0}}
+};
+var SC = {1:0,2:0,3:0,4:0,5:0};
+var PT = {c:0,t:TOTAL_TASKS,a:[]};
+var state = {cs:0,sr:[0,0,0,0,0]};
+var accordionCompleted = {};
+var tfCompleted = {};
+var ynSelections = {};
+var selections = {};
+var selectValues = {};
+var algState  = {step:1,answers:[],picks:[],finished:false,token:0};
+var algState2 = {step:1,answers:[],picks:[],finished:false,token:0};
+var twoColState = {leftSel:null,rightSel:null,matched:[]};
+var TF_ANS = {s2t3q1:'false',s2t3q2:'true',s2t3q3:'true'};
+var YN_ANS = {'s3t3_1':'yes','s3t3_2':'no','s3t3_3':'yes','s3t3_4':'no'};
+var MATCH_ANS = {match2:{m21:'b',m22:'d',m23:'a',m24:'c'},match5:{m51:'b',m52:'c',m53:'d',m54:'a'}};
+var TASK_GROUP = {'step1_task1':'s1t1','step4_task2':'s4t2','step4_task3':'s4t3','step5_task1':'s5t1','step5_task3':'s5t3'};
+var ALG_CFG = {
+    main:{stepId:'algStep',dotId:'algDot',gid:'alg',progressId:'algProgress',resultId:'algResult',scoreId:'resultScore',emojiId:'resultEmoji',titleId:'resultTitle',textId:'resultText',tid:'step3_task2'},
+    pos:{stepId:'alg2Step',dotId:'alg2Dot',gid:'alg2',progressId:'alg2Progress',resultId:'alg2Result',scoreId:'alg2ResultScore',emojiId:'alg2ResultEmoji',titleId:'alg2ResultTitle',textId:'alg2ResultText',tid:'step2_task2',stagePrefix:'alg2Stage'}
+};
+var ALG2_QUESTIONS = [
+    'Що для тебе важливо в цій ситуації?',
+    'Які наслідки можуть бути у кожного варіанта?',
+    'Яку дію ти обереш?',
+    'Що робити, якщо ти вже дав(ла) списати?'
+];
+
+// Допоміжні функції
+function $(id){return document.getElementById(id);}
+function qa(sel,root){return Array.prototype.slice.call((root||document).querySelectorAll(sel));}
+
+/* ==================== ЗБЕРЕЖЕННЯ ==================== */
+function saveP(){
+    try{
+        sessionStorage.setItem(STORAGE_KEY,JSON.stringify({
+            PT:PT,ST:ST,SC:SC,state:state,
+            accordionCompleted:accordionCompleted,tfCompleted:tfCompleted,
+            ynSelections:ynSelections,selections:selections,selectValues:selectValues,
+            algState:algState,algState2:algState2,twoColMatched:twoColState.matched
+        }));
+    }catch(e){console.error('Помилка збереження:',e);}
+}
+
+function loadP(){
+    try{
+        var raw=localStorage.getItem(STORAGE_KEY);
+        if(!raw)return;
+        var d=JSON.parse(raw);
+        if(d.PT){PT.c=d.PT.c||0;PT.a=d.PT.a||[];PT.t=TOTAL_TASKS;}
+        if(d.ST){for(var i=1;i<=5;i++){var s=d.ST['step'+i];if(s&&ST['step'+i]){ST['step'+i].c=s.c||0;ST['step'+i].tasks=s.tasks||ST['step'+i].tasks;}}}
+        if(d.SC){for(var j=1;j<=5;j++)SC[j]=d.SC[j]||0;}
+        if(d.state){state.cs=d.state.cs||0;state.sr=d.state.sr||[0,0,0,0,0];}
+        if(d.accordionCompleted)accordionCompleted=d.accordionCompleted;
+        if(d.tfCompleted)tfCompleted=d.tfCompleted;
+        if(d.ynSelections)ynSelections=d.ynSelections;
+        if(d.selections)selections=d.selections;
+        if(d.selectValues)selectValues=d.selectValues;
+        if(d.algState)algState=d.algState;
+        if(d.algState2)algState2=d.algState2;
+        if(d.twoColMatched)twoColState.matched=d.twoColMatched;
+    }catch(e){console.error('Помилка завантаження:',e);}
+}
+
+/* ==================== ПРОГРЕС ==================== */
+function addC(id){
+    if(PT.a.indexOf(id)!==-1)return;
+    PT.a.push(id);PT.c++;
+    var m=id.match(/step(\d+)_(task\d+)/);
+    if(m){
+        var n=parseInt(m[1],10),key='step'+n,task=m[2],s=ST[key];
+        if(s&&s.tasks.hasOwnProperty(task)){
+            s.tasks[task]=1;s.c=0;
+            for(var k in s.tasks){if(s.tasks[k])s.c++;}
+            if(s.c===s.t&&!SC[n]){SC[n]=1;showToast('Крок '+n+' завершено!','🏆');}
+        }
+    }
+    updLive();saveP();
+}
+
+function updLive(){
+    var c=0;for(var i=1;i<=5;i++)c+=ST['step'+i].c;
+    var p=Math.min(100,Math.round(c/TOTAL_TASKS*100));
+    if($('topProgressBar'))$('topProgressBar').style.width=p+'%';
+    if($('widgetPercentage'))$('widgetPercentage').textContent=p+'%';
+    if($('widgetTasks'))$('widgetTasks').textContent=c+'/'+TOTAL_TASKS;
+    var mm=$('widgetMiniMap');
+    if(mm){mm.innerHTML='';for(var j=1;j<=5;j++){var d=document.createElement('div');d.className='mini-step'+(SC[j]?' completed':(j===state.cs?' current':''));d.textContent=j;mm.appendChild(d);}}
+    renderNav();updS6();
+}
+
+var steps=[
+    {id:1,icon:'🎯',title:'Стартове завдання',tasks:1},
+    {id:2,icon:'🧭',title:'Моральні цінності',tasks:3},
+    {id:3,icon:'🤝',title:'Етична взаємодія',tasks:3},
+    {id:4,icon:'⚠️',title:'Наслідки порушень',tasks:3},
+    {id:5,icon:'🛡️',title:'Дискримінація і булінг',tasks:3},
+    {id:6,icon:'⭐',title:'Самооцінювання',tasks:0}
+];
+
+function renderNav(){
+    var n=$('stepNavigation');if(!n)return;n.innerHTML='';
+    steps.forEach(function(s,idx){
+        var d=document.createElement('div');d.className='step-nav-item';
+        var done=s.tasks>0&&SC[s.id];
+        if((s.id===6&&SC[5])||done)d.classList.add('completed');
+        else if(idx+1===state.cs)d.classList.add('active'); // Виправлено: порівняння з поточним кроком
+        
+        var td=s.tasks>0?ST['step'+s.id].c:0;
+        d.innerHTML='<div class="step-nav-number">'+(done?'✓':(idx+1))+'</div><div class="step-nav-content"><div class="step-nav-title">'+s.icon+' '+s.title+'</div><div class="step-nav-status">'+(s.tasks>0?td+'/'+s.tasks+' завдань':'Фінал')+'</div></div>';
+        d.setAttribute('tabindex','0');d.setAttribute('role','button');
+        d.setAttribute('aria-label','Перейти до кроку '+(idx+1)+': '+s.title);
+        d.onclick=function(){goToStep(idx+1);};
+        n.appendChild(d);
+    });
+}
+
+function updS6(){
+    var c=0;for(var i=1;i<=5;i++)c+=ST['step'+i].c;
+    var p=Math.min(100,Math.round(c/TOTAL_TASKS*100));
+    var ac=PT.t>0?Math.round(PT.c/PT.t*100):0;
+    var cs=0;for(var j=1;j<=5;j++)if(SC[j])cs++;
+    var lv='Початківець',em='⭐☆☆☆☆';
+    if(p>=76){lv='Майстер етичної взаємодії';em='⭐⭐⭐⭐⭐';}
+    else if(p>=51){lv='Досвідчений учень';em='⭐⭐⭐☆☆';}
+    else if(p>=26){lv='Учень';em='⭐⭐☆☆☆';}
+    
+    var els = ['statTasks','statCorrect','statSteps','statAccuracy','progressCircle','circlePercentage','finalLevelTitle','finalLevelDesc'];
+    els.forEach(function(id){
+        var el = $(id);
+        if(!el) return;
+        
+        if(id==='statTasks') el.textContent=c+'/'+TOTAL_TASKS;
+        if(id==='statCorrect') el.textContent=PT.c;
+        if(id==='statSteps') el.textContent=cs+'/5';
+        if(id==='statAccuracy') el.textContent=ac+'%';
+        if(id==='progressCircle') el.style.background='conic-gradient(var(--success) '+p+'%,var(--bg) '+p+'%)';
+        if(id==='circlePercentage') el.textContent=p+'%';
+        if(id==='finalLevelTitle') el.textContent=lv;
+        if(id==='finalLevelDesc') el.textContent=em;
+    });
+
+    qa('.star-rating').forEach(function(box){
+        var skill=parseInt(box.getAttribute('data-skill'),10)-1;
+        if(skill < 0 || skill >= state.sr.length) return; // Захист від виходу за межі
+        qa('.star',box).forEach(function(st,i){
+            st.classList.toggle('active',state.sr[skill]>i);
+            st.setAttribute('aria-label','Оцінка '+(i+1)+' з 5');
+            st.setAttribute('aria-pressed',state.sr[skill]===i+1?'true':'false');
+        });
+    });
+}
+
+/* ==================== НАВІГАЦІЯ ==================== */
+function hideAll(){
+    qa('main.container').forEach(function(m){m.classList.add('hidden');});
+}
+
+function goToMainPage(){
+    hideAll();
+    var mp = $('mainPage');
+    if(mp) mp.classList.remove('hidden');
+    var ht = $('headerTitle');
+    if(ht) ht.textContent='⚖️ § 29. Моральні та етичні цінності';
+    state.cs=0;
+    saveP();
+    updLive();
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function goToStep(n){
+    console.log("Going to step:", n); // Логування для відладки
+    hideAll();
+    var pages={1:'step1Page',2:'step2Page',3:'step3Page',4:'step4Page',5:'step5Page',6:'step6Page'};
+    var pageId = pages[n];
+    if(!pageId) {
+        console.error("Invalid step number", n);
+        return;
+    }
+    var el=$(pageId);
+    if(!el){
+        console.error("Element not found for id:", pageId);
+        return;
+    }
+    el.classList.remove('hidden');
+    state.cs=n;
+    
+    if(n===2) showS2('s2Theory');
+    if(n===3) showS3('s3Theory');
+    if(n===4) showS4('s4Theory');
+    if(n===5) showS5('s5Theory');
+    if(n===6) updS6();
+    
+    saveP();
+    updLive();
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function showSection(prefix,list,id){
+    list.forEach(function(s){
+        var el = $(s);
+        if(el) el.classList.add('hidden');
+    });
+    var target = $(id);
+    if(target) target.classList.remove('hidden');
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function showS2(id){showSection('s2',['s2Theory','s2t1','s2t2','s2t3'],id);}
+function showS3(id){showSection('s3',['s3Theory','s3t1','s3t2','s3t3'],id);}
+function showS4(id){showSection('s4',['s4Theory','s4t1','s4t2','s4t3'],id);}
+function showS5(id){showSection('s5',['s5Theory','s5t1','s5t2','s5t3'],id);}
+
+/* ==================== ЗАГАЛЬНІ ВІДПОВІДІ ==================== */
+function remember(gid){
+    var opts = qa('#'+gid+' .option');
+    selections[gid]=opts.map(function(el,i){return el.classList.contains('selected')?i:-1;}).filter(function(i){return i>=0;});
+}
+
+function sel(el,gid){
+    if(el.classList.contains('disabled'))return;
+    qa('#'+gid+' .option').forEach(function(o){o.classList.remove('selected','incorrect');});
+    el.classList.add('selected');
+    remember(gid);
+    saveP();
+}
+
+function tog(el){
+    if(el.classList.contains('disabled'))return;
+    el.classList.toggle('selected');
+    var parent = el.closest('.task-options');
+    if(parent) {
+        var gid = parent.id;
+        remember(gid);
+        saveP();
+    }
+}
+
+function selAcc(el,gid,qid){
+    if(el.classList.contains('disabled'))return;
+    qa('#'+gid+' .option').forEach(function(o){o.classList.remove('selected','incorrect');});
+    el.classList.add('selected');
+    var f=$(gid+'f');
+    if(!f)return;
+    f.style.display='block';
+    if(el.getAttribute('data-correct')==='true'){
+        el.classList.add('correct');
+        f.className='feedback feedback-success';
+        f.innerHTML='<strong>✅ Правильно!</strong> '+(el.querySelector('.option-label')?el.querySelector('.option-label').textContent:'');
+        qa('#'+gid+' .option').forEach(function(o){
+            o.classList.add('disabled');
+            if(o.getAttribute('data-correct')==='true')o.classList.add('correct');
+        });
+        accordionCompleted[qid]=true;
+    }else{
+        el.classList.add('incorrect');
+        f.className='feedback feedback-error';
+        f.innerHTML='<strong>❌ Неправильно.</strong> Подумай, яке право або межа були порушені, і спробуй ще раз.';
+    }
+    saveP();
+}
+
+function chk(gid,tid){
+    var s=document.querySelector('#'+gid+' .option.selected');
+    var f=$(gid+'f');
+    if(!f)return;
+    f.style.display='block';
+    if(!s){
+        f.className='feedback feedback-warning';
+        f.innerHTML='⚠️ Обери варіант відповіді.';
+        return;
+    }
+    if(s.getAttribute('data-correct')==='true'){
+        s.classList.add('correct');
+        f.className='feedback feedback-success';
+        f.innerHTML='<strong>✅ Правильно!</strong>';
+        qa('#'+gid+' .option').forEach(function(o){
+            o.classList.add('disabled');
+            if(o.getAttribute('data-correct')==='true')o.classList.add('correct');
+        });
+        addC(tid);
+        showToast('Завдання виконано!','🎉');
+    }else{
+        s.classList.add('incorrect');
+        f.className='feedback feedback-error';
+        f.innerHTML='<strong>❌ Неправильно.</strong> Зверни увагу не лише на слова агресора, а й на реакцію свідків.';
+    }
+}
+
+function chkMulti(gid,fid,need,tid){
+    var opts=qa('#'+gid+' .option');
+    var f=$(fid);
+    if(!f)return;
+    f.style.display='block';
+    var picked=opts.filter(function(o){return o.classList.contains('selected');});
+    if(picked.length!==need){
+        f.className='feedback feedback-warning';
+        f.innerHTML='⚠️ Обери рівно <strong>'+need+'</strong> варіантів. Зараз обрано: '+picked.length+'.';
+        return;
+    }
+    var ok=true;
+    opts.forEach(function(o){
+        var right=o.getAttribute('data-correct')==='true';
+        var is=o.classList.contains('selected');
+        if(right&&is)o.classList.add('correct');
+        else if(!right&&is){o.classList.add('incorrect');ok=false;}
+        else if(right&&!is)ok=false;
+    });
+    if(ok){
+        opts.forEach(function(o){o.classList.add('disabled');});
+        f.className='feedback feedback-success';
+        f.innerHTML='<strong>✅ Правильно!</strong> Ти правильно визначив(ла) порушені принципи.';
+        addC(tid);
+        showToast('Завдання виконано!','🎉');
+    }else{
+        f.className='feedback feedback-error';
+        f.innerHTML='<strong>❌ Не зовсім.</strong> Перевір, які варіанти справді стосуються ситуації.';
+        setTimeout(function(){
+            opts.forEach(function(o){o.classList.remove('correct','incorrect','disabled');});
+        },1800);
+    }
+}
+
+function chkMatching(containerId,answers,fid,tid){
+    var f=$(fid);
+    if(!f)return;
+    f.style.display='block';
+    var ok=0,total=Object.keys(answers).length;
+    for(var id in answers){
+        var s=$(id);
+        if(!s)continue;
+        s.classList.remove('correct','incorrect');
+        if(s.value===answers[id]){
+            s.classList.add('correct');
+            ok++;
+        }
+        else if(s.value)s.classList.add('incorrect');
+    }
+    if(ok===total){
+        f.className='feedback feedback-success';
+        f.innerHTML='<strong>✅ Чудово!</strong> Усі відповіді правильні.';
+        addC(tid);
+        showToast('Завдання виконано!','🎉');
+    }else{
+        f.className='feedback feedback-error';
+        f.innerHTML='<strong>❌ Правильно: '+ok+'/'+total+'.</strong> Обери відповідність між поняттям і прикладом.';
+        setTimeout(function(){
+            qa('#'+containerId+' .matching-select').forEach(function(s){s.classList.remove('correct','incorrect');});
+        },2000);
+    }
+}
+
+/* ==================== АКОРДЕОН / ПРАВДА-БРЕХНЯ ==================== */
+function toggleAccordion(header){
+    var item=header.parentElement;
+    var active=item.classList.contains('active');
+    qa('.accordion-item',item.parentElement).forEach(function(it){
+        it.classList.remove('active');
+        var h=it.querySelector('.accordion-header');
+        if(h)h.setAttribute('aria-expanded','false');
+    });
+    if(!active){
+        item.classList.add('active');
+        header.setAttribute('aria-expanded','true');
+    }
+}
+
+function chkAccordion(prefix,expected,tid){
+    var count=Object.keys(accordionCompleted).filter(function(k){return accordionCompleted[k];}).length;
+    var f=$(prefix+'f');
+    if(!f)return;
+    f.style.display='block';
+    if(count>=expected){
+        f.className='feedback feedback-success';
+        f.innerHTML='<strong>✅ Чудово!</strong> Ти розпізнав(ла) усі порушення етичних меж.';
+        addC(tid);
+        showToast('Завдання виконано!','🎉');
+    }else{
+        f.className='feedback feedback-warning';
+        f.innerHTML='💡 Відповідай на всі питання ('+count+'/'+expected+'), щоб завершити завдання.';
+    }
+}
+
+function tfSel(el,gid,value){
+    if(el.classList.contains('disabled'))return;
+    var cards=qa('#'+gid+' .tf-card');
+    cards.forEach(function(c){
+        c.classList.remove('selected');
+        c.style.outline='';
+    });
+    el.classList.add('selected');
+    el.style.outline='3px solid var(--warning)';
+    var f=$(gid+'f');
+    if(!f)return;
+    f.style.display='block';
+    if(TF_ANS[gid]===value){
+        f.className='feedback feedback-success';
+        var msg = '';
+        if(gid==='s2t3q1') msg = '<strong>✅ Правильно!</strong> Власна позиція ґрунтується на цінностях, перевірених фактах і повазі до інших поглядів.';
+        else if(gid==='s2t3q2') msg = '<strong>✅ Правильно!</strong> Людина обирає, як діяти, усвідомлюючи, що мовчання чи бездіяльність також є вибором.';
+        else msg = '<strong>✅ Правильно!</strong> Саме так: цінності допомагають не порушувати прав, гідності та меж інших.';
+        f.innerHTML=msg;
+        cards.forEach(function(c){
+            c.classList.add('disabled');
+            c.style.outline='';
+        });
+        el.style.outline='3px solid var(--success)';
+        tfCompleted[gid]=true;
+    }else{
+        f.className='feedback feedback-error';
+        f.innerHTML='<strong>❌ Неправильно.</strong> Пригадай означення з теоретичного блоку.';
+        el.style.outline='3px solid var(--danger)';
+    }
+    saveP();
+}
+
+function chkTFAcc(fid,tid){
+    var f=$(fid);
+    if(!f)return;
+    f.style.display='block';
+    var total=Object.keys(TF_ANS).length;
+    var ok=Object.keys(TF_ANS).filter(function(k){return tfCompleted[k];}).length;
+    if(ok===total){
+        f.className='feedback feedback-success';
+        f.innerHTML='<strong>✅ Чудово!</strong> Усі твердження оцінено правильно.';
+        addC(tid);
+        showToast('Завдання виконано!','🎉');
+    }else{
+        f.className='feedback feedback-warning';
+        f.innerHTML='💡 Відкрий і опрацюй усі твердження ('+ok+'/'+total+').';
+    }
+}
+
+/* ==================== ТАК / НІ ==================== */
+function ynSelV2(btn){
+    var key=btn.getAttribute('data-yn');
+    var val=btn.getAttribute('data-value');
+    ynSelections[key]=val;
+    qa('.yn-btn',btn.parentElement).forEach(function(b){
+        b.classList.remove('selected-yes','selected-no');
+    });
+    btn.classList.add(val==='yes'?'selected-yes':'selected-no');
+    saveP();
+}
+
+function chkYnV2(gridId,expected,fId,tid){
+    var f=$(fId);
+    if(!f)return;
+    f.style.display='block';
+    var rows=qa('#'+gridId+' .yn-row');
+    var answered=0,ok=0;
+    rows.forEach(function(row){
+        var btns=qa('.yn-btn',row);
+        var selBtn=null;
+        btns.forEach(function(b){
+            if(b.classList.contains('selected-yes')||b.classList.contains('selected-no'))selBtn=b;
+        });
+        btns.forEach(function(b){b.classList.remove('correct','incorrect');});
+        if(!selBtn)return;
+        answered++;
+        var key=selBtn.getAttribute('data-yn');
+        var val=selBtn.getAttribute('data-value');
+        if(YN_ANS[key]===val){
+            ok++;
+            selBtn.classList.add('correct');
+        }
+        else selBtn.classList.add('incorrect');
+    });
+    if(answered<expected){
+        f.className='feedback feedback-warning';
+        f.innerHTML='⚠️ Дай відповідь на всі '+expected+' твердження. Зараз: '+answered+'/'+expected+'.';
+        return;
+    }
+    if(ok===expected){
+        f.className='feedback feedback-success';
+        f.innerHTML='<strong>✅ Чудово!</strong> Ти розрізняєш незгоду та порушення етичних меж.';
+        addC(tid);
+        showToast('Завдання виконано!','🎉');
+    }else{
+        f.className='feedback feedback-error';
+        f.innerHTML='<strong>❌ Правильно: '+ok+'/'+expected+'.</strong> Пам\'ятай: приниження та погрози — це порушення меж.';
+        setTimeout(function(){
+            qa('#'+gridId+' .yn-btn').forEach(function(b){b.classList.remove('correct','incorrect');});
+        },2200);
+    }
+}
+
+/* ==================== УНІВЕРСАЛЬНА СИМУЛЯЦІЯ ==================== */
+function fillSimResult(st,cfg){
+    var score=st.answers.reduce(function(a,b){return a+(b||0);},0);
+    var emoji,title,text;
+    if(score>=10){
+        emoji='🏆';
+        title=cfg===ALG_CFG.pos?'Майстер відповідальної позиції!':'Майстер захисту меж!';
+        text=cfg===ALG_CFG.pos?'Ти демонструєш високий рівень усвідомленості: дієш відповідно до цінностей, аналізуєш наслідки й обираєш етичну поведінку.':'Ти вмієш відстоювати свої межі ненасильницько та відповідально.';
+    }
+    else if(score>=6){
+        emoji='⭐';
+        title='Досвідчений учень';
+        text='Ти добре розумієш алгоритм, але деякі кроки варто повторити. Спробуй ще раз, щоб досягти максимуму!';
+    }
+    else{
+        emoji='🌱';
+        title='Початківець';
+        text='Це нормально — відповідальна поведінка потребує практики. Пройди симуляцію ще раз, зупиняючись на кожному запитанні.';
+    }
+    var eEmo = $(cfg.emojiId); if(eEmo) eEmo.textContent=emoji;
+    var eTit = $(cfg.titleId); if(eTit) eTit.textContent=title;
+    var eTxt = $(cfg.textId); if(eTxt) eTxt.textContent=text;
+    var eScr = $(cfg.scoreId); if(eScr) eScr.textContent=score+'/12';
+}
+
+function updateAlg2Stages(){
+    var st=algState2;
+    for(var i=1;i<=4;i++){
+        var dot=$('alg2Dot'+i),stage=$('alg2Stage'+i);
+        if(!dot||!stage)continue;
+        dot.classList.remove('active','completed');
+        stage.classList.remove('active','done');
+        var done=st.finished||st.answers[i-1]===3;
+        if(done){
+            dot.classList.add('completed');
+            stage.classList.add('done');
+        }
+        else if(i===st.step){
+            dot.classList.add('active');
+            stage.classList.add('active');
+        }
+    }
+    var pEl = $('alg2Progress');
+    if(pEl) pEl.textContent=st.finished?'Завершено!':'Крок '+st.step+' з 4';
+    var qEl = $('alg2CurrentQ');
+    if(qEl) qEl.textContent=st.finished?'Усі 4 кроки алгоритму опрацьовано.':ALG2_QUESTIONS[st.step-1];
+}
+
+function renderSim(st,cfg){
+    for(var i=1;i<=4;i++){
+        var step=$(cfg.stepId+i),dot=$(cfg.dotId+i),f=$(cfg.gid+i+'f');
+        if(step)step.classList.add('hidden');
+        if(dot)dot.classList.remove('active','completed');
+        if(f)f.style.display='none';
+        qa('#'+cfg.gid+i+' .option').forEach(function(o){
+            o.classList.remove('selected','correct','incorrect','disabled');
+        });
+    }
+    var res=$(cfg.resultId);
+    if(res)res.classList.add('hidden');
+    
+    if(st.finished){
+        for(var k=1;k<=4;k++){
+            var d=$(cfg.dotId+k);
+            if(d&&st.answers[k-1]===3)d.classList.add('completed');
+        }
+        if(res)res.classList.remove('hidden');
+        var progEl = $(cfg.progressId);
+        if(progEl) progEl.textContent='Завершено!';
+        fillSimResult(st,cfg);
+    }else{
+        var cur=st.step||1;
+        for(var n=1;n<cur;n++){
+            var dn=$(cfg.dotId+n);
+            if(dn)dn.classList.add('completed');
+        }
+        var da=$(cfg.dotId+cur);
+        if(da)da.classList.add('active');
+        var curStep=$(cfg.stepId+cur);
+        if(curStep)curStep.classList.remove('hidden');
+        var progEl2 = $(cfg.progressId);
+        if(progEl2) progEl2.textContent='Крок '+cur+' з 4';
+        
+        var pick=st.picks?st.picks[cur-1]:null;
+        if(pick){
+            qa('#'+cfg.gid+cur+' .option').forEach(function(o){
+                if(o.getAttribute('data-score')===String(pick.score)){
+                    o.classList.add(pick.correct?'correct':'incorrect');
+                    if(!pick.correct)o.classList.add('disabled');
+                }
+            });
+            var pf=$(cfg.gid+cur+'f');
+            if(pf&&!pick.correct){
+                pf.style.display='block';
+                pf.className='feedback feedback-warning';
+                pf.innerHTML='💡 Ця відповідь не є відповідальною. Спробуй інший варіант.';
+            }
+        }
+    }
+    if(cfg.stagePrefix)updateAlg2Stages();
+}
+
+function handleAlgChoice(el,gid,step,key){
+    if(el.classList.contains('disabled'))return;
+    var st=key==='pos'?algState2:algState;
+    var cfg=ALG_CFG[key];
+    qa('#'+gid+' .option').forEach(function(o){o.classList.remove('selected');});
+    el.classList.add('selected');
+    var f=$(gid+'f');
+    if(!f)return;
+    f.style.display='block';
+    var score=parseInt(el.getAttribute('data-score'),10);
+    var correct=el.getAttribute('data-correct')==='true';
+    st.answers[step-1]=correct?3:score;
+    st.picks[step-1]={score:score,correct:correct};
+    st.token=(st.token||0)+1;
+    var token=st.token;
+    if(correct){
+        f.className='feedback feedback-success';
+        var expEl = el.querySelector('.option-explanation');
+        f.innerHTML='<strong>✅ Правильно!</strong> '+(expEl?expEl.textContent:'');
+        el.classList.add('correct');
+        qa('#'+gid+' .option').forEach(function(o){o.classList.add('disabled');});
+        setTimeout(function(){
+            if(st.token!==token)return;
+            if(step<4){
+                st.step=step+1;
+                renderSim(st,cfg);
+                saveP();
+            }
+            else{
+                st.finished=true;
+                renderSim(st,cfg);
+                addC(cfg.tid);
+                showToast('🎉 Симуляцію завершено!','🏆');
+            }
+        },1300);
+    }else{
+        f.className='feedback feedback-warning';
+        var expEl2 = el.querySelector('.option-explanation');
+        f.innerHTML='<strong>💡 Подумай ще раз.</strong> '+(expEl2?expEl2.textContent:'');
+        el.classList.add('incorrect','disabled');
+    }
+    saveP();
+}
+
+function algSel(el,gid,step){handleAlgChoice(el,gid,step,'main');}
+function algSel2(el,gid,step){handleAlgChoice(el,gid,step,'pos');}
+
+function resetSim(key){
+    var st=key==='pos'?algState2:algState;
+    var cfg=ALG_CFG[key];
+    var token=(st.token||0)+1;
+    var fresh={step:1,answers:[],picks:[],finished:false,token:token};
+    if(key==='pos')algState2=fresh;else algState=fresh;
+    renderSim(fresh,cfg);
+    saveP();
+    showToast('Симуляцію скинуто. Спробуй ще раз!','🔄');
+}
+
+function resetAlg(){resetSim('main');}
+function resetAlg2(){resetSim('pos');}
+
+/* ==================== ДВІ КОЛОНКИ ==================== */
+function matchSel(el,side){
+    if(el.classList.contains('matched'))return;
+    qa('#twoColMatch .match-item').forEach(function(m){
+        if(!m.classList.contains('matched'))m.classList.remove('selected');
+    });
+    el.classList.add('selected');
+    if(side==='left')twoColState.leftSel=el;else twoColState.rightSel=el;
+    if(twoColState.leftSel&&twoColState.rightSel){
+        var left=twoColState.leftSel,right=twoColState.rightSel;
+        var lp=parseInt(left.getAttribute('data-pair'),10);
+        var rp=parseInt(right.getAttribute('data-pair'),10);
+        if(lp===rp){
+            left.classList.add('matched');
+            right.classList.add('matched');
+            left.classList.remove('selected');
+            right.classList.remove('selected');
+            if(twoColState.matched.indexOf(lp)===-1)twoColState.matched.push(lp);
+            twoColState.leftSel=null;
+            twoColState.rightSel=null;
+            showToast('Пара з\'єднана!','✅');
+            saveP();
+        }else{
+            left.classList.add('wrong');
+            right.classList.add('wrong');
+            setTimeout(function(){
+                left.classList.remove('wrong','selected');
+                right.classList.remove('wrong','selected');
+            },600);
+            twoColState.leftSel=null;
+            twoColState.rightSel=null;
+        }
+    }
+}
+
+function chkTwoCol(tid){
+    var f=$('s4t1f');
+    if(!f)return;
+    f.style.display='block';
+    if(twoColState.matched.length===4){
+        f.className='feedback feedback-success';
+        f.innerHTML='<strong>✅ Чудово!</strong> Усі пари з\'єднано правильно. Це послідовність відповідального визнання помилки.';
+        addC(tid);
+        showToast('Завдання виконано!','🎉');
+    }else{
+        f.className='feedback feedback-warning';
+        f.innerHTML='⚠️ З\'єднано '+twoColState.matched.length+' з 4 пар. Продовжуй — спочатку вислухай, потім дій.';
+    }
+}
+
+/* ==================== КАРТКИ ЦІННОСТЕЙ / РОЛЕЙ ==================== */
+function toggleEICard(card){
+    var expanded=card.classList.contains('expanded');
+    qa('.ei-card').forEach(function(c){
+        c.classList.remove('expanded');
+        c.setAttribute('aria-expanded','false');
+    });
+    if(!expanded){
+        card.classList.add('expanded');
+        card.setAttribute('aria-expanded','true');
+        setTimeout(function(){
+            card.scrollIntoView({behavior:'smooth',block:'nearest'});
+        },120);
+    }
+}
+
+/* ==================== САМООЦІНЮВАННЯ ==================== */
+function rate(skill,rating){
+    if(skill-1 < 0 || skill-1 >= state.sr.length) return;
+    state.sr[skill-1]=rating;
+    qa('.star-rating[data-skill="'+skill+'"] .star').forEach(function(s,i){
+        s.classList.toggle('active',i<rating);
+    });
+    saveP();
+    updS6();
+}
+
+function resetProgress(){
+    if(confirm('Почати спочатку? Весь прогрес буде скинуто.')){
+        try{localStorage.removeItem(STORAGE_KEY);}catch(e){}
+        location.reload();
+    }
+}
+
+/* ==================== МОДАЛКИ / TOAST ==================== */
+var lastFocused=null;
+function openModal(id){
+    lastFocused=document.activeElement;
+    var modal = $(id);
+    if(modal) modal.classList.add('active');
+    document.body.style.overflow='hidden';
+    setTimeout(function(){
+        var b=modal?modal.querySelector('button'):null;
+        if(b)b.focus();
+    },60);
+}
+
+function closeModal(id){
+    var modal = $(id);
+    if(modal) modal.classList.remove('active');
+    if(!document.querySelector('.modal-overlay.active'))document.body.style.overflow='';
+    if(lastFocused&&lastFocused.focus)lastFocused.focus();
+}
+
+function showProgressModal(){
+    updS6();
+    var c=0;for(var i=1;i<=5;i++)c+=ST['step'+i].c;
+    var p=Math.min(100,Math.round(c/TOTAL_TASKS*100));
+    var ac=PT.t?Math.round(PT.c/PT.t*100):0;
+    var cs=0;for(var j=1;j<=5;j++)if(SC[j])cs++;
+    var lv='Початківець',em='⭐☆☆☆☆';
+    if(p>=76){lv='Майстер етичної взаємодії';em='⭐⭐⭐⭐⭐';}
+    else if(p>=51){lv='Досвідчений учень';em='⭐⭐⭐☆☆';}
+    else if(p>=26){lv='Учень';em='⭐⭐☆☆☆';}
+    
+    var mT = $('mT'); if(mT) mT.textContent=c+'/'+TOTAL_TASKS;
+    var mC = $('mC'); if(mC) mC.textContent=PT.c;
+    var mS = $('mS'); if(mS) mS.textContent=cs+'/5';
+    var mA = $('mA'); if(mA) mA.textContent=ac+'%';
+    var mP = $('mP'); if(mP) mP.textContent=p+'%';
+    var mBar = $('mBar'); if(mBar) mBar.style.width=p+'%';
+    var mName = $('mName'); if(mName) mName.textContent=lv;
+    var mEmoji = $('mEmoji'); if(mEmoji) mEmoji.textContent=em;
+    
+    openModal('progressModal');
+}
+
+function showHelpModal(){openModal('helpModal');}
+
+function showToast(msg,icon){
+    var c=$('toastContainer');
+    if(!c)return;
+    var t=document.createElement('div');
+    t.className='toast';
+    t.innerHTML='<span class="toast-icon">'+(icon||'✅')+'</span><span class="toast-message">'+msg+'</span>';
+    c.appendChild(t);
+    setTimeout(function(){
+        t.classList.add('hiding');
+        setTimeout(function(){
+            if(t.parentNode)t.parentNode.removeChild(t);
+        },400);
+    },3500);
+}
+
+/* ==================== ВІДНОВЛЕННЯ ІНТЕРФЕЙСУ ==================== */
+function markGroupCorrect(gid){
+    var opts=qa('#'+gid+' .option');
+    if(!opts.length)return;
+    opts.forEach(function(o){
+        o.classList.add('disabled');
+        if(o.getAttribute('data-correct')==='true'){
+            o.classList.add('selected','correct');
+        }
+        else o.classList.remove('selected');
+    });
+    var f=$(gid+'f');
+    if(f){
+        f.style.display='block';
+        f.className='feedback feedback-success';
+        f.innerHTML='<strong>✅ Завдання вже виконано.</strong>';
+        remember(gid);
+    }
+}
+
+function isGroupDone(gid){
+    for(var tid in TASK_GROUP){
+        if(TASK_GROUP[tid]===gid&&PT.a.indexOf(tid)!==-1)return true;
+    }
+    if(gid.indexOf('s3t1q')===0&&PT.a.indexOf('step3_task1')!==-1)return true;
+    return false;
+}
+
+function restoreUI(){
+    // звичайні та множинні тести
+    for(var gid in selections){
+        if(isGroupDone(gid))continue;
+        var opts=qa('#'+gid+' .option');
+        (selections[gid]||[]).forEach(function(i){
+            if(opts[i])opts[i].classList.add('selected');
+        });
+    }
+    for(var tid in TASK_GROUP){
+        if(PT.a.indexOf(tid)!==-1)markGroupCorrect(TASK_GROUP[tid]);
+    }
+    if(PT.a.indexOf('step3_task1')!==-1){
+        ['q1','q2','q3'].forEach(function(q){
+            markGroupCorrect('s3t1'+q);
+        });
+    }
+    else{
+        for(var qid in accordionCompleted){
+            if(!accordionCompleted[qid])continue;
+            var g='s3t1'+qid;
+            var os=qa('#'+g+' .option');
+            os.forEach(function(o){
+                o.classList.add('disabled');
+                if(o.getAttribute('data-correct')==='true')o.classList.add('correct');
+            });
+            var ff=$(g+'f');
+            if(ff){
+                ff.style.display='block';
+                ff.className='feedback feedback-success';
+                ff.innerHTML='<strong>✅ Правильно!</strong>';
+            }
+        }
+    }
+    // правда / брехня
+    for(var tg in TF_ANS){
+        if(!tfCompleted[tg])continue;
+        var cards=qa('#'+tg+' .tf-card');
+        cards.forEach(function(c){
+            c.classList.add('disabled');
+            c.style.outline='';
+            var isTrue=c.classList.contains('true-card');
+            if((TF_ANS[tg]==='true'&&isTrue)||(TF_ANS[tg]==='false'&&!isTrue)){
+                c.classList.add('selected');
+                c.style.outline='3px solid var(--success)';
+            }
+        });
+        var tf=$(tg+'f');
+        if(tf){
+            tf.style.display='block';
+            tf.className='feedback feedback-success';
+            tf.innerHTML='<strong>✅ Правильно!</strong>';
+        }
+    }
+    // так / ні
+    for(var yk in ynSelections){
+        var selector = '#ynGrid3 [data-yn="'+yk+'"][data-value="'+ynSelections[yk]+'"]';
+        var btn=document.querySelector(selector);
+        if(btn)btn.classList.add(ynSelections[yk]==='yes'?'selected-yes':'selected-no');
+    }
+    if(PT.a.indexOf('step3_task3')!==-1){
+        qa('#ynGrid3 .yn-row').forEach(function(row){
+            qa('.yn-btn',row).forEach(function(b){
+                if(b.getAttribute('data-value')===YN_ANS[b.getAttribute('data-yn')])b.classList.add('correct');
+            });
+        });
+    }
+    // зіставлення
+    qa('.matching-select').forEach(function(s){
+        if(selectValues[s.id]!==undefined)s.value=selectValues[s.id];
+    });
+    if(PT.a.indexOf('step2_task1')!==-1){
+        for(var a in MATCH_ANS.match2){
+            var el=$(a);
+            if(el&&el.value===MATCH_ANS.match2[a])el.classList.add('correct');
+        }
+    }
+    if(PT.a.indexOf('step5_task2')!==-1){
+        for(var b in MATCH_ANS.match5){
+            var el2=$(b);
+            if(el2&&el2.value===MATCH_ANS.match5[b])el2.classList.add('correct');
+        }
+    }
+    // дві колонки
+    twoColState.matched.forEach(function(pair){
+        qa('#twoColMatch [data-pair="'+pair+'"]').forEach(function(m){
+            m.classList.add('matched');
+            m.classList.remove('selected','wrong');
+        });
+    });
+    // симуляції
+    renderSim(algState,ALG_CFG.main);
+    renderSim(algState2,ALG_CFG.pos);
+}
+
+/* ==================== ДОСТУПНІСТЬ ==================== */
+function initA11y(){
+    qa('.option').forEach(function(o){
+        o.setAttribute('role','button');
+        o.setAttribute('tabindex','0');
+    });
+    qa('.tf-card').forEach(function(c){
+        c.setAttribute('role','button');
+        c.setAttribute('tabindex','0');
+        var titleEl = c.querySelector('.tf-card-title');
+        if(titleEl) c.setAttribute('aria-label',titleEl.textContent);
+    });
+    qa('.accordion-header').forEach(function(h){
+        h.setAttribute('role','button');
+        h.setAttribute('tabindex','0');
+        h.setAttribute('aria-expanded','false');
+    });
+    qa('.match-item').forEach(function(m){
+        m.setAttribute('role','button');
+        m.setAttribute('tabindex','0');
+        m.setAttribute('aria-label',m.textContent.trim());
+    });
+    qa('.star-rating').forEach(function(box){
+        var skill=parseInt(box.getAttribute('data-skill'),10);
+        qa('.star',box).forEach(function(s,i){
+            s.setAttribute('role','button');
+            s.setAttribute('tabindex','0');
+            s.setAttribute('aria-label','Оцінка '+(i+1)+' з 5');
+            s.onclick=function(){rate(skill,i+1);};
+        });
+    });
+    qa('.feedback').forEach(function(f){
+        f.setAttribute('role','status');
+        f.setAttribute('aria-live','polite');
+    });
+    qa('.matching-select').forEach(function(s){
+        s.addEventListener('change',function(){
+            selectValues[s.id]=s.value;
+            saveP();
+        });
+    });
+}
+
+document.addEventListener('keydown',function(e){
+    if((e.key==='Enter'||e.key===' ')&&e.target.getAttribute&&e.target.getAttribute('role')==='button'&&e.target.tagName!=='BUTTON'){
+        e.preventDefault();
+        e.target.click();
+        return;
+    }
+    var modal=document.querySelector('.modal-overlay.active');
+    if(!modal)return;
+    if(e.key==='Escape'){
+        e.preventDefault();
+        closeModal(modal.id);
+        return;
+    }
+    if(e.key==='Tab'){
+        var list=qa('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',modal).filter(function(el){
+            return el.offsetParent!==null;
+        });
+        if(!list.length)return;
+        var first=list[0],last=list[list.length-1];
+        if(e.shiftKey&&document.activeElement===first){
+            e.preventDefault();
+            last.focus();
+        }
+        else if(!e.shiftKey&&document.activeElement===last){
+            e.preventDefault();
+            first.focus();
+        }
+    }
+});
+
+/* ==================== СТАРТ ==================== */
+document.addEventListener('DOMContentLoaded',function(){
+    try {
+        initA11y();
+        qa('.modal-overlay').forEach(function(m){
+            m.addEventListener('click',function(e){
+                if(e.target===m)closeModal(m.id);
+            });
+        });
+        loadP();
+        restoreUI();
+        updLive();
+        goToMainPage();
+    } catch (error) {
+        console.error("Critical error during initialization:", error);
+        alert("Помилка завантаження сторінки. Перевірте консоль.");
+    }
+});
+</script>
+
+</body>
+</html>
